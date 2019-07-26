@@ -1,0 +1,155 @@
+<apex:page sidebar="False"  standardController="Launch_360_View__c" extensions="myControllerExtension">
+  <!-- Soon to be Standard Object List -->
+   <apex:sectionheader subtitle="Standard Objects"/>
+
+<apex:form >
+    <apex:pageblock title="Custom Objects">
+        <apex:commandButton value="Show" action="{!custom}" />
+    </apex:pageblock>
+</apex:form>
+
+ <apex:form >
+ 
+        <apex:pageblock id="Account" title="Accounts" >
+ <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">   
+        <apex:pageblockTable value="{!acct}" var="a" rendered="{!NOT(ISNULL(acct))}">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!Accts}" value="Open">
+                     <apex:param name="c" assignTo="{!AcctId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.AccountNumber}"/>
+            <apex:column style="width:150px" value="{!a.Industry}"/>
+            <apex:column style="width:150px" value="{!a.Type}"/>
+            <apex:column style="width:150px" value="{!a.Rating}"/>           
+            <apex:column style="width:150px" value="{!a.Ownership}"/>
+            
+        </apex:pageblockTable>
+        
+ </apex:outputpanel>
+    </apex:pageblock> 
+
+    </apex:form>
+
+ <apex:form >
+        <apex:pageblock id="Contact" title="Contacts" >
+ <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">   
+    
+        <apex:pageblockTable value="{!contak}" var="a">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!contaks}" value="Open">
+                     <apex:param name="c" assignTo="{!contakId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Department}"/>
+            <apex:column style="width:150px" value="{!a.LeadSource}"/>            
+            <apex:column style="width:150px" value="{!a.Title}"/>
+
+        </apex:pageblockTable>
+   </apex:outputpanel>     
+    </apex:pageblock> 
+    </apex:form>
+
+
+
+ <apex:form >
+        <apex:pageblock id="Case" title="Cases" >
+    <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">
+        <apex:pageblockTable value="{!casee}" var="a">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!cases}" value="Open">
+                     <apex:param name="c" assignTo="{!casesId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Subject}"/>
+            <apex:column style="width:150px" value="{!a.Reason}"/>
+            <apex:column style="width:150px" value="{!a.Status}"/>
+            <apex:column style="width:150px" value="{!a.Origin}"/>
+            <apex:column style="width:150px" value="{!a.Priority}"/>
+            
+        </apex:pageblockTable>
+      </apex:outputpanel>
+    </apex:pageblock> 
+ </apex:form>
+
+
+<apex:form >
+        <apex:pageblock id="Campaign" title="Campaigns" >
+    <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">
+        <apex:pageblockTable value="{!camp}" var="a">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!camps}" value="Open">
+                     <apex:param name="c" assignTo="{!campId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Status}"/>
+            <apex:column style="width:150px" value="{!a.Type}"/>
+            <apex:column style="width:150px" value="{!a.StartDate}"/>
+            <apex:column style="width:150px" value="{!a.EndDate}"/>
+            
+        </apex:pageblockTable>
+      </apex:outputpanel>
+    </apex:pageblock> 
+ </apex:form>
+
+
+<apex:form >
+        <apex:pageblock id="Lead" title="Leads" >
+    <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">
+        <apex:pageblockTable value="{!Lea}" var="a">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!Leas}" value="Open">
+                     <apex:param name="c" assignTo="{!LeaId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Title}"/>
+            <apex:column style="width:150px" value="{!a.Company}"/>
+            <apex:column style="width:150px" value="{!a.Status}"/>
+            
+        </apex:pageblockTable>
+      </apex:outputpanel>
+    </apex:pageblock> 
+ </apex:form>
+
+
+
+<apex:form >
+        <apex:pageblock id="Opportunity" title="Opportunities" >
+    <apex:outputpanel style="overflow:scroll;height:100px;" layout="block">
+        <apex:pageblockTable value="{!Oppor}" var="a">
+            
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!Oppors}" value="Open">
+                     <apex:param name="c" assignTo="{!OpporId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Amount}"/>
+            <apex:column style="width:150px" value="{!a.Type}"/>
+            <apex:column style="width:150px" value="{!a.Probability}"/>
+            
+        </apex:pageblockTable>
+      </apex:outputpanel>
+    </apex:pageblock> 
+    
+    
+ </apex:form>
+
+
+
+</apex:page>

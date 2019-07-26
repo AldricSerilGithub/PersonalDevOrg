@@ -1,0 +1,19 @@
+<!--<apex:page standardController="Position__c" recordSetVar="positions" extensions="MySecondController">-->
+<apex:page controller="MyControllerBootcamp">
+    <!--<apex:pageblock >
+        <apex:pageblockTable value="{!positions}" var="a">
+
+            <apex:column value="{!a.name}"/>        
+        </apex:pageblockTable>
+    </apex:pageblock>
+    
+    <apex:pageblock >
+        <apex:outputText >
+        {!Name}
+        </apex:outputText>
+        {!Positions.Name}
+        {!Positions.Id}
+        {!Positions.Owner.FirstName}
+    </apex:pageblock>
+    -->
+</apex:page>

@@ -1,0 +1,96 @@
+<apex:page standardController="Quote" extensions="QuoteLineItemCtrl" >
+    <apex:form >
+        <apex:pageBlock >
+            
+            
+            
+            
+            <!--<apex:repeat value="{!lstPickvals}" var="headerV">-->
+   
+                 <apex:repeat value="{!lstquotelineItemHeaderClass}" var="headerLevel">
+                     Header : {!headerLevel.HeaderName}  |  Quantity : {!headerLevel.HeaderQty}  |  Item Price: {!headerLevel.HeaderTotalItemPrice}
+                      <table>
+                          <th>Action</th>
+                          <th>Product<br></br> </th>
+                          <th>Sales Price</th>
+                          <th>Quantity</th>
+                          <th>Subtotal</th>
+                          <th>Discount</th>
+                          <th>Total Price</th>
+                          <th>List Price</th>
+                     <apex:repeat value="{!headerLevel.lstQuoteLineItem}" var="headerLevel2">
+      
+                            <tr>
+                                
+                                <td><apex:outputLink target="_parent" value="{! URLFOR($Action.QuoteLineItem.Edit, headerLevel2.Id, ['retURL'=headerLevel2.QuoteID])}"  style="color:#015ba7;">Edit</apex:outputLink>
+                                <!--<apex:outputLink target="_parent" value="{!}"  style="color:#015ba7;">Edit</apex:outputLink>-->
+                                &nbsp;|&nbsp;
+                                <apex:outputLink target="_parent" value="{! URLFOR($Action.QuoteLineItem.Delete, headerLevel2.Id, ['retURL'=headerLevel2.QuoteID]) }" style="color:#015ba7;" >Del</apex:outputLink></td>
+                                <td><apex:outputLink id="Product2" target="_parent"  value="/{!headerLevel2.Product2.Id}" >{!headerLevel2.Product2.Name}</apex:outputlink></td>
+                                <td>SAR {!headerLevel2.UnitPrice}</td>
+                                <td>{!headerLevel2.Quantity}</td>
+                                <td>SAR {!headerLevel2.Subtotal}</td>
+                                <td>{!headerLevel2.Discount}%</td>
+                                <td>SAR {!headerLevel2.TotalPrice}</td>
+                                <td>SAR {!headerLevel2.ListPrice}</td>
+                                
+                            </tr>
+                            
+                        
+                         </apex:repeat>
+                        </table>
+                        </apex:repeat>
+             
+        </apex:pageBlock>
+    </apex:form>
+ <style>
+            table{
+                
+                width:100%;
+                  border:1px solid rgb(224, 227, 229);
+                  border-collapse: collapse;
+                  
+            }
+            th{
+                background-color:#f2f3f3;
+                border:1px solid rgb(224, 227, 229);
+                padding-left:5px;
+                padding-top:5px;
+                padding-bottom:5px;
+                font-size:11px;
+            }
+           
+            td{
+                background-color:white;
+                padding-left:5px;
+                padding-top:5px;
+                padding-bottom:5px;
+            }
+            
+            .titleHeader{
+                width:350px;
+                float:left;
+                font-family:Arial, Helvetica, sans-serif;
+                font-size:13px;
+                color:black;
+                font-weight:bold;
+            }
+            .buttons{
+                float:left;
+                margin-left:80px;
+                height:40px;
+                padding-top:0px;
+            }
+          
+            tr:hover td {
+              background-color: #e0f3ff;
+            }
+            
+            </style>
+            
+    <script>
+         function openPopup(page, param) {
+            window.open(page+'?id='+param,'_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=100, left=500, width=500, height=500')
+         }    
+    </script>
+</apex:page>

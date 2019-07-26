@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:registerEvent name="SearchEvent" type="c:SearchEvent"/>
+    <aura:attribute name="term" type="String"/>
+    
+    <h1>Search Component</h1>
+    
+    <div>
+    	<form>
+            <ui:inputText aura:id="name" placeHolder="Enter Search String" value="{!v.term}"/>
+        	<ui:button label="Go" press="{!c.doSearch}" aura:id="searchbtn"/> 
+        </form>
+    </div>
+    
+</aura:component>

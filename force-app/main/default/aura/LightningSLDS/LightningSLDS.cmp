@@ -1,0 +1,7 @@
+<aura:component >
+    <ltng:require styles="{!$Resource.SLDS213 +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    
+    <lightning:icon iconName="action:call" size="large"/>
+	
+</aura:component>

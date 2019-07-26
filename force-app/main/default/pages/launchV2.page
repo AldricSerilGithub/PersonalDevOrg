@@ -1,0 +1,88 @@
+<apex:page sidebar="False" controller="launchver2" >
+  <apex:form >
+ <center>
+       <apex:commandButton value="Export to PDF" action="{!expdf}"/>
+       <apex:commandButton value="Toggle Page"/>
+ </center>
+
+ <apex:pageblock id="Contact" title="Contacts" rendered="{!NOT(ISNULL(contak))}">
+        <apex:pageblockTable value="{!contak}" var="a" >
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Department}"/>
+            <apex:column style="width:150px" value="{!a.LeadSource}"/>            
+            <apex:column style="width:150px" value="{!a.Title}"/>
+        </apex:pageblockTable>
+    </apex:pageblock> 
+</apex:form>
+
+
+<apex:form >
+        <apex:pageblock id="Opportunity" title="Opportunities" rendered="{!NOT(ISNULL(Oppor))}" >
+        <apex:pageblockTable value="{!Oppor}" var="a"  >
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Amount}"/>
+            <apex:column style="width:150px" value="{!a.Type}"/>
+            <apex:column style="width:150px" value="{!a.Probability}"/>
+        </apex:pageblockTable>
+    </apex:pageblock> 
+ </apex:form>
+  
+ 
+  <apex:form >
+        <apex:pageblock id="Case" title="Cases" rendered="{!NOT(ISNULL(casee))}">
+        <apex:pageblockTable value="{!casee}" var="a" >
+            <apex:column style="width:150px" value="{!a.Subject}"/>
+            <apex:column style="width:150px" value="{!a.Reason}"/>
+            <apex:column style="width:150px" value="{!a.Status}"/>
+            <apex:column style="width:150px" value="{!a.Origin}"/>
+            <apex:column style="width:150px" value="{!a.Priority}"/>            
+        </apex:pageblockTable>
+    </apex:pageblock> 
+ </apex:form>
+
+<apex:form >
+    <apex:pageblock title="Open Activities" rendered="{!NOT(ISNULL(Open))}">
+        <apex:pageblockTable value="{!Open}" var="temp"> 
+           <apex:column style="width:150px" value="{!temp.Subject}"/>
+           <apex:column style="width:150px" value="{!temp.Description}"/>
+           <apex:column style="width:150px" value="{!temp.Status}"/>
+           <apex:column style="width:150px" value="{!temp.Priority}"/>       
+        
+        </apex:pageblockTable>  
+    </apex:pageblock>
+</apex:form>
+ 
+ 
+<apex:form >
+    <apex:pageblock title="Activity History" rendered="{!NOT(ISNULL(Hist))}">
+        <apex:pageblockTable value="{!Hist}" var="temp"> 
+           <apex:column style="width:150px" value="{!temp.Subject}"/>
+           <apex:column style="width:150px" value="{!temp.Description}"/>
+           <apex:column style="width:150px" value="{!temp.Status}"/>
+           <apex:column style="width:150px" value="{!temp.Priority}"/>         
+        </apex:pageblockTable>  
+    </apex:pageblock>
+</apex:form> 
+ 
+ 
+<apex:form >
+    <apex:pageblock title="Notes and Attachments"  rendered="{!NOT(ISNULL(NoteA))}">
+        <apex:pageblockTable value="{!NoteA}" var="temp"> 
+           <apex:column style="width:150px" value="{!temp.Title}"/>
+           
+        </apex:pageblockTable>  
+    </apex:pageblock>
+</apex:form>  
+ 
+
+<apex:form >
+    <apex:pageblock title="Partners" rendered="{!NOT(ISNULL(Partn))}" >
+        <apex:pageblockTable value="{!Partn}" var="temp"> 
+           <apex:column style="width:150px" value="{!temp.Role}"/>
+        </apex:pageblockTable>  
+    </apex:pageblock>
+</apex:form> 
+
+ 
+ 
+    </apex:page>

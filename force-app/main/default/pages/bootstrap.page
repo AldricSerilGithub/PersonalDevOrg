@@ -1,0 +1,26 @@
+<apex:page showHeader="false" sidebar="false" controller="TestMapError">
+ <apex:includeScript value="https://code.jquery.com/jquery-3.1.1.min.js"/>
+ <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.standalone.css"/>
+ <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"/> 
+ <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"/>
+    
+   
+<input id="datepicker" placeholder="Start Date" data-date-format="dd-mm-yyyy" onChange="toggleCheck();"/>
+
+
+
+    <script type="text/javascript">
+       $('#datepicker').datepicker({
+        
+        todayHighlight: true
+    });
+    
+    function toggleCheck(){
+    var date = document.getElementById("datepicker").value;
+    console.log(date);
+    }
+
+
+    </script>
+
+</apex:page>

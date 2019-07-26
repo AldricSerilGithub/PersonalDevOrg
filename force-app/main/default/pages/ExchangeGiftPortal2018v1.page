@@ -1,0 +1,94 @@
+<apex:page StandardController="ExchangeGift__c" extensions="exchangeGiftController" showHeader="false" sidebar="false">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://s3.amazonaws.com/codecademy-content/courses/holiday-cards/snowfall.min.js"></script>
+
+
+<style>
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgba(75, 75, 76, 1);
+  font-size: 62.5%;
+}
+
+section {
+  background: url(https://aldrictraining-dev-ed--c.na74.visual.force.com/resource/1541075732000/BackgroundImage);
+  width: 700px;
+  height: 500px;
+  color: white;
+  position: relative;
+  margin: auto;
+}
+
+#snowman {
+  width: 13%;
+  margin-bottom: -47%;
+  margin-left: 5%;
+  transform: rotateZ(5deg);
+  -webkit-transform: rotateZ(5deg);
+}
+
+h1 {
+  font-family: "Dancing Script OT";
+  font-size: 5em;
+  padding-top: 0.5em;
+}
+
+section h1 {
+  text-align: center;
+}
+
+p {
+  font-size: 37px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10%;
+  margin-bottom: 5%;
+  font-family: "vshandprinted";
+}
+
+span {
+  font-family: "Dancing Script OT";
+  font-weight: bold;
+  font-size: 30px;
+}
+</style>
+
+<section>
+
+
+
+
+</section>
+
+<script>
+
+$(document).ready(function() {
+  snowFall.snow($('section'), {
+    minSize: 1,
+    maxSize: 8,
+    round: true,
+    minSpeed: 1,
+    maxSpeed: 2,
+    flakeCount: 120,
+  });
+  
+  $('body').hide();
+  $('section').hide();
+  $('h1').hide();
+  $('p').hide();
+  
+  $('body').delay(300).fadeIn();
+  $('section').delay(400).fadeIn();
+  
+});
+
+
+</script>
+
+
+</apex:page>

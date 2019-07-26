@@ -1,0 +1,31 @@
+<apex:page standardController="Account" extensions="bootcampController">
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:form >
+  {!myName}
+  <br/>
+  {!Name}
+  <br/>
+  Name
+  <br/>
+  <apex:inputtext value="{!inputName}" label="Name"/>
+  <br/>
+  <apex:commandButton value="Submit" action="{!Submit}"/>
+  
+    
+<apex:pageblock >
+    <apex:pageblockTable value="{!objectWrapperList }" var="objectWrap">
+        <apex:column value="{!objectWrap.userName}"/>
+        <apex:column value="{!objectWrap.orgName}"/>   
+        <apex:column >
+            <apex:inputCheckbox value="{!objectWrap.checkboxs}"/>   
+        </apex:column>            
+
+    </apex:pageblockTable>
+
+</apex:pageblock>
+  
+  
+  </apex:form>
+  
+  
+</apex:page>

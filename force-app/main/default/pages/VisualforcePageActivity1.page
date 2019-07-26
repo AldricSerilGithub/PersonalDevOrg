@@ -1,0 +1,80 @@
+<apex:page standardController="Contact">
+    <apex:stylesheet value="{!URLFOR($Resource.ContactTabs, 'ContactTabs.css')}"/>
+    
+    <style>
+    .rich-tab-active {
+        background-color: #56458C; 
+        color: white; 
+        background-image: none; 
+        font-size: 110%; 
+        font-weight: bold;
+    }
+
+    .rich-tab-inactive { 
+        background-color: #D3D3D3; 
+        color: black; 
+        background-image: none; 
+        font-size: 110%;
+    }
+
+    .tabPanelTopGap {
+        margin-top: 10px;
+    }
+    </style>
+    
+    <apex:outputPanel >
+        <apex:detail relatedList="False" subject="{!contact}"/>
+    
+    </apex:outputPanel>
+    
+    <apex:tabPanel switchType="client" selectedTab="Subscriber" id="theTabPanel">
+        <apex:tab label="Subscription(Subscriber)" name="Subscriber" id="tabOne">
+        
+            <apex:relatedList list="Contacts__r" title="Subscriptions" />
+        
+        </apex:tab>
+        
+        <apex:tab label="Subscription(Recipient)" name="Recipient" id="tabTwo">
+        
+            <apex:relatedList list="Contacts__r" title="Subscriptions"/>
+        
+        </apex:tab>
+        
+        <apex:tab label="Open Activities" name="Activities" id="tabThree">
+        
+            <apex:relatedList list="ActivityHistories"/>
+        
+        </apex:tab>
+        
+        
+        <apex:tab label="Activity History" name="History" id="tabFour">
+        
+            <apex:relatedList list="ActivityHistories"/>
+        
+        </apex:tab>
+        
+        <apex:tab label="Case" name="Case" id="tabFive">
+        
+            <apex:relatedList list="Cases"/>
+        
+        </apex:tab>
+        
+        
+        
+        <apex:tab label="Notes & Attachement" name="Notes" id="tabSix">
+        
+            <apex:relatedList list="CombinedAttachments"/>
+        
+        </apex:tab>
+        
+    </apex:tabPanel>
+
+
+
+
+
+
+
+
+
+</apex:page>

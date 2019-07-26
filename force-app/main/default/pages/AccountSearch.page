@@ -1,0 +1,47 @@
+<apex:page controller="AccountSearchController" sidebar="false">
+  <apex:form >
+    <apex:pageblock >
+        <apex:pageblockSection >
+            <apex:inputText label="Account Name" value="{!accountRecord}"/>
+            <apex:inputText label="Country" value="{!country}"/>
+            <apex:inputText label="Contact Name" value="{!contactName}"/>
+            <apex:inputText label="Account Type" value="{!accountType}"/>
+            
+            <center>
+                <apex:commandButton value="Search" action="{!searchButton}" reRender="Results"/>
+            </center>
+        </apex:pageblockSection>
+    </apex:pageblock>
+    <center>
+    <apex:outputPanel id="Results">
+        <apex:pageblock >
+           <apex:pageblockSection >
+                <apex:pageblockTable value="{!accountList}" var="accounts">
+                    <apex:column headerValue="Account Name" value="{!accounts.Name}"/>        
+                    <apex:column headerValue="Billing Country" value="{!accounts.BillingCountry}"/>        
+                    <apex:column headerValue="Type" value="{!accounts.Type}"/>   
+                    <apex:column headerValue="Contacts">
+                        <apex:repeat value="{!accounts.Contacts}" var="contactRecord">
+                            <apex:outputField value="{!contactRecord.FirstName}"/>&nbsp;
+                            <apex:outputField value="{!contactRecord.LastName}"/>
+                            <br/>
+                        </apex:repeat>
+                    </apex:column>
+                </apex:pageblockTable>
+            </apex:pageblockSection>
+        <apex:commandButton value="First Page" action="{!firstPage}" rerender="Results" disabled="{!IF(PageNumber>1, False, True)}"/>    
+        <apex:commandButton value="Previous Page" action="{!previousPage}" rerender="Results" disabled="{!IF(PageNumber>1, False, True)}"/>    
+        <b>{!pageNumber} out of {!totalPage} &nbsp;</b>
+        <apex:commandButton value="Next Page" action="{!nextPage}" rerender="Results" disabled="{!IF(PageNumber<totalPage, False, True)}"/>    
+        <apex:commandButton value="Last Page" action="{!lastPage}" rerender="Results" disabled="{!IF(PageNumber<totalPage, False, True)}"/>    
+        </apex:pageblock>        
+    </apex:outputPanel>
+        
+        
+    
+    </center>
+    
+  </apex:form>
+  
+  
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page controller="Launch360ViewController" renderAs="pdf" showHeader="false">
+<apex:stylesheet value="{!URLFOR($Resource.PDF360View1, 'exportPDF.css')}"/> 
+        <c:Footer360ViewPDF type="footer" showPageNumbers="true" position="center" /> 
+        <c:Header360ViewPDF type="header" position="right" />
+
+<html>
+<head>
+        <style>
+            x1 {
+                font-family: Arial Unicode MS;
+                font-size:10px; 
+            }
+        </style>
+</head>
+<body>
+    <!-- apex:pageBlock -->
+    <x1>
+<table class="list" id="thePage:theTable" border="1" cellpadding="0" cellspacing="0">
+            <tr class="x1">
+        <td width="200px"><apex:outputText value="Case Number" /></td><td width="400px"><apex:outputText value="{!caseRec.CaseNumber}" /></td>
+        </tr>
+        <tr class="x1">
+        <td width="200px"><apex:outputText value="Subject" /></td><td width="400px"><apex:outputText value="{!caseRec.Subject}" /></td>
+        </tr>
+        <tr class="x1">
+        <td width="200px"><apex:outputText value="Description" /></td><td width="400px"><apex:outputText value="{!caseRec.Description}" /></td>
+        </tr>
+        <tr class="x1">
+        <td width="200px"><apex:outputText value="Environment" /></td><td width="400px"><apex:outputText value="{!caseRec.Environment__c}" /></td>
+        </tr>
+        </table>
+    <br />
+
+    <apex:repeat value="{!sObjectList}" var="key" >
+        
+        <!-- apex:repeat value="{!sObjectMap[key]}" var="object"-->
+        <table class="list" id="thePage:theTable" border="1" cellpadding="0" cellspacing="0">
+            <tr class="x1">
+                <th rowspan="15" width="200px">{!objectMap[key.ObjectType].Label__c}</th>
+            </tr>
+            
+            <apex:repeat value="{!fieldMap[key.ObjectType]}" var="f">
+            <tr class="x1">
+                <td width="200px"><apex:outputText value="{!labelMap[key.ObjectType][f]}" /></td>
+                <td width="300px"><apex:outputField value="{!key.Record[f]}" label="{!f}" /></td>
+                
+            </tr>
+            </apex:repeat>
+        </table> <br />
+        <!--/apex:repeat-->
+    </apex:repeat>
+    </x1>
+    </body>
+    <!-- /apex:pageBlock-->
+</html> 
+</apex:page>

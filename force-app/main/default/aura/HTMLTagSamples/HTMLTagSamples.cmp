@@ -1,0 +1,3 @@
+<aura:component >
+    <input type="text" id = "FirstName" placeholder="First Name"/>
+</aura:component>

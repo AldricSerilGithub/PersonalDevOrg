@@ -1,0 +1,68 @@
+<!-- 
+      Created By: Accenture - Marvin Bonifacio
+      Created On: Service Cloud R1
+      Purpose: VF Page for 360 view functionality. Override on 360 view tab
+      ------------------------------------------------------------------------
+      Modified By: Accenture - John Aldric Seril
+      Modified On: 12/12/2014
+      Modification: Added Error Handling when there are no related list to show
+ -->
+
+<apex:page controller="Launch360ViewController">
+<apex:sectionHeader title="Launch 360 View" subtitle="360 View Objects and Fields" />
+<apex:pageMessages />
+
+    <apex:form >
+    <apex:pageBlock mode="maindetail">
+    <apex:pageBlockButtons location="top">
+      <apex:commandButton action="{!toggleSinglePage}" value="Toggle Single Page" reRender="theList,paginationLinks,first,previous,next,last" disabled="{!sObjectList.size==0}"/>
+      <apex:commandButton action="{!exportToPDF}" value="Export to PDF"  disabled="{!sObjectList.size==0}"  />
+      <apex:commandButton action="{!backToCase}" value="Back to Case" />
+  </apex:pageBlockButtons>  
+  
+    <!-- Case details of parent case -->
+    <apex:pageBlockSection title="Case Information" columns="1" collapsible="false"><!-- rendered="{!showCaseInfo}"-->
+        <apex:outputfield value="{!caseRec.CaseNumber}" />
+        <apex:outputfield value="{!caseRec.Subject}" />
+        <apex:outputfield value="{!caseRec.Description}" />
+        <apex:outputfield value="{!caseRec.Environment__c}" />
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock id="theList">
+    
+    <!-- shows lists of objects under case -->
+        
+    <apex:repeat value="{!sObjectList}" var="key" first="{!currentIndex}" rows="{!pageSize}">
+        
+        <table class="list" id="thePage:theTable" border="0" cellpadding="0" cellspacing="0">
+            <tr class="dataRow even first">
+                <th rowspan="15" class="dataCell" width="100px">{!objectMap[key.ObjectType].Label__c}</th>
+            </tr>
+            <apex:variable var="index" value="{!-1}" /> 
+            <apex:repeat value="{!fieldMap[key.ObjectType]}" var="f">
+            <tr class="dataRow even first">
+                <apex:variable var="index" value="{!index+1}" /> 
+                <td class="dataCell" width="200px"><apex:outputText value="{!labelMap[key.ObjectType][f]}" /></td>
+                <td class="dataCell" width="200px"><apex:outputField value="{!key.Record[f]}" label="{!f}" /></td>
+            </tr>
+            
+            </apex:repeat>
+         
+        </table> <br />
+    </apex:repeat>
+    <apex:outputtext value="Record has no Related List" rendered="{!sObjectList.size==0}" ></apex:outputtext>
+    <!-- Pagination Links : updates for R2 -->
+    <apex:outputPanel id="paginationLinks" rendered="{!showPagination}">
+    <table >
+    <tr>
+        <td width="20%"><apex:commandLink id="first" action="{!first}" rendered="{!isNotFirstPage}" value="◄◄ First Page" reRender="theList,paginationLinks,first,previous,next,last"/></td>
+        <td width="20%"><apex:commandLink id="previous" action="{!previous}" rendered="{!hasPrevious}" value="◄ Previous Page" reRender="theList,paginationLinks,first,previous,next,last"/></td>
+        <td width="20%"><apex:outputText value="Page {!currentPage} of {!lastPage}" /></td>
+        <td width="20%"><apex:commandLink id="next" action="{!next}" rendered="{!hasNext}" value="Next Page ►" reRender="theList,paginationLinks,first,previous,next,last"/></td>
+        <td width="20%"><apex:commandLink id="last" action="{!last}" rendered="{!isNotLastPage}" value="Last Page ►►" reRender="theList,paginationLinks,first,previous,next,last"/></td>
+    </tr>
+    </table>
+    </apex:outputPanel>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

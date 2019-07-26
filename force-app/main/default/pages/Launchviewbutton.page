@@ -1,0 +1,6 @@
+<apex:page standardcontroller="Login__c" sidebar="False">
+  <apex:form >
+      <center><apex:commandButton value="Launch 360 View" onClick="window.open('apex/launchview')"/>
+      </center>
+  </apex:form>
+</apex:page>

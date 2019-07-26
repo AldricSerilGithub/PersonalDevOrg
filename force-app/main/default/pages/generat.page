@@ -1,0 +1,72 @@
+<apex:page standardcontroller="Login__c" renderAs="PDf" sidebar="false" extensions="LoginTime" standardStylesheets="false" >
+
+<apex:stylesheet value="{!URLFOR($Resource.myStyles, 'customStyles.css')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.Sample1, 'sample.css' )}"/>
+<apex:stylesheet value="{!URLFOR($Resource.PDF360View1, 'exportPDF.css')}"/> 
+        <c:Footer360ViewPDF type="footer" showPageNumbers="true" position="center" /> 
+        <c:Header360ViewPDF type="header" position="right" />
+
+
+<center>
+<apex:sectionHeader Title="Time In and Time Out Report" />
+</center>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+
+Resource Name: &nbsp; {!$User.FirstName} {!$User.LastName}
+<br></br>
+<br></br>
+<apex:outputText value="{0,date}">
+  Generated Date: &nbsp; <apex:param value="{!Today}" />
+</apex:outputText>
+
+<br></br>
+
+
+<p>
+    <apex:pageblock id="Login__c">
+         <apex:pageblockTable border="1px" value="{!po}" var="a" width="100%" >
+           <apex:column value="{!a.Timein__c}"  />
+            <apex:column value="{!a.Timeout__c}" />
+            <apex:column value="{!a.Total_Hours__c}"/>
+            <apex:column value="{!a.Under_Time__c}"/>
+            <apex:column value="{!a.Over_Time__c}"/>
+            <apex:column value="{!a.Status__c}"/> 
+         </apex:pageblockTable>
+         
+<br></br>
+<br></br>
+         
+    
+       <apex:dataTable value="{!totalOT}" var="temp"> 
+           <apex:column >
+     Total Number of Over Time: &nbsp; <apex:outputText value="{!temp['OT']}"/>
+                </apex:column>
+       </apex:dataTable>
+    
+    <br></br>
+       
+       <apex:dataTable value="{!totalUT}" var="temp"> 
+           <apex:column >
+     Total Number of Under Time: &nbsp; <apex:outputText value="{!temp['UT']}"/>
+           </apex:column>
+       </apex:dataTable>
+
+    <br></br>
+
+    <apex:dataTable value="{!totalTBO}" var="temp"> 
+           <apex:column >
+     Total Time: &nbsp; <apex:outputText value="{!temp['OT']-temp['UT']}"/>
+           </apex:column>
+       </apex:dataTable>
+
+   
+           
+   
+          
+    </apex:pageblock>
+</p>
+</apex:page>

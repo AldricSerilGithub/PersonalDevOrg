@@ -1,0 +1,51 @@
+<aura:component controller="MassAccountListController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" >
+    <aura:attribute name="AccountList" type="Account[]" />
+    
+    <aura:registerEvent name="AccountListEvent" type="c:MassAccountEvent"/>
+    
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
+   
+    <fieldset class="slds-box slds-theme--default slds-container--large" style="background: url(http://hdimages.org/wp-content/uploads/2016/11/html-background-image-HD1-1.jpg) no-repeat center center fixed">
+            <legend  class="slds-text-heading--small 
+              slds-p-vertical--medium">
+              <h1>Account List</h1>
+            </legend>
+        
+        	<form class="slds-form--stacked" >
+                       
+            	<table style="height " class="slds-table slds-table--bordered slds-table--cell-buffer slds-table--fixed-layout">
+                   <thead >
+                      <tr class="slds-text-heading--label">
+                        <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Type">Type</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Industry">Industry</div></th>
+                        <th scope="col"><div class="slds-truncate" title="Action">Action</div></th>
+                      </tr>
+                    </thead>
+                     <tbody>
+                  
+                  <aura:iteration items="{!v.AccountList}" var="account" indexVar="idx">
+                   
+                     
+                      <tr bgcolor="{!account.Id==null ? '#41a5e0' : idx%2 == 0 ? '#37bf4e' : '#9aa8af'}">
+                      <td><a href="{!'/'+ account.Id}"><div class="slds-truncate" title="{!account.Name}">{!account.Name}</div></a></td>
+                      <td><div class="slds-truncate" title="{!account.Phone}">{!account.Phone}</div></td>
+                      <td><div class="slds-truncate" title="{!account.Type}">{!account.Type}</div></td>
+                      <td><div class="slds-truncate" title="{!account.Industry}">{!account.Industry}</div></td>
+                      <td>
+                        <div class="slds-truncate">  
+                            <lightning:button value="{!idx}" class="slds-button slds-button--destructive" label="Remove" onclick="{!c.removeAccountButtonClick}"/>
+                            
+                        
+                        </div>                        
+                      </td>
+                    </tr>
+                  </aura:iteration>
+                </tbody>
+              	</table>
+          		
+        	</form>
+        
+      	</fieldset>
+</aura:component>

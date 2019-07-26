@@ -1,0 +1,12 @@
+<apex:page controller="AldricsPageController">
+    {!Name}  
+    
+    {!accounts.Id}
+    {!accounts.Name}
+    <apex:form >
+       
+       Surname: &nbsp;<apex:inputText value="{!surname}" /> <apex:commandButton value="Submit" action="{!result}"/>
+       <apex:commandbutton value="Redirect" action="{!redirectToAnother}"/>
+    </apex:form>
+    
+ </apex:page>

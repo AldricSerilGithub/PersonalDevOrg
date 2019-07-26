@@ -1,0 +1,58 @@
+<apex:page sidebar="false" controller="Mycontroller" >
+      <apex:form >
+ <center>
+       <apex:commandButton value="Export to PDF" action="{!expdf}"/>
+       <apex:commandButton value="Toggle Page"/>
+ </center>
+
+ <apex:pageblock id="Contact" title="Contacts" rendered="{!NOT(ISNULL(contak))}">
+        <apex:pageblockTable value="{!contak}" var="a" >
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Department}"/>
+            <apex:column style="width:150px" value="{!a.LeadSource}"/>            
+            <apex:column style="width:150px" value="{!a.Title}"/>
+        </apex:pageblockTable>
+    </apex:pageblock> 
+</apex:form>
+
+
+<apex:form >
+        <apex:pageblock id="Opportunity" title="Opportunities" rendered="{!NOT(ISNULL(Oppor))}" >
+        <apex:pageblockTable value="{!Oppor}" var="a"  >
+            <apex:column style="width:150px" value="{!a.Name}"/>
+            <apex:column style="width:150px" value="{!a.Amount}"/>
+            <apex:column style="width:150px" value="{!a.Type}"/>
+            <apex:column style="width:150px" value="{!a.Probability}"/>
+        </apex:pageblockTable>
+    </apex:pageblock> 
+ </apex:form>
+  
+ 
+  <apex:form >
+        <apex:pageblock id="Case" title="Cases" rendered="{!NOT(ISNULL(casee))}">
+        <apex:pageblockTable value="{!casee}" var="a">
+            <apex:column style="width:150px" value="{!a.Subject}"/>
+            <apex:column style="width:150px" value="{!a.Reason}"/>
+            <apex:column style="width:150px" value="{!a.Status}"/>
+            <apex:column style="width:150px" value="{!a.Origin}"/>
+            <apex:column style="width:150px" value="{!a.Priority}"/>            
+        </apex:pageblockTable>
+    </apex:pageblock> 
+ </apex:form>
+ 
+ 
+ <apex:pageblock id="Login__c" title="Time In and Time Out History" >
+    
+        <apex:pageblockTable value="{!po}" var="a">
+            <apex:column style="width:150px" value="{!a.Timein__c}"/>
+            <apex:column style="width:150px" value="{!a.Timeout__c}"/>
+            <apex:column style="width:150px" value="{!a.Total_Hours__c}"/>
+            <apex:column style="width:150px" value="{!a.Under_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Over_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Status__c}"/>
+        </apex:pageblockTable>
+
+    </apex:pageblock> 
+ 
+
+  </apex:page>

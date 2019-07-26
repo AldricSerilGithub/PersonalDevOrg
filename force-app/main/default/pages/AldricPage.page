@@ -1,0 +1,39 @@
+<apex:page controller="AldricPageController">
+
+<apex:form >
+    <apex:pageBlock >
+        <apex:pageblockTable value="{!aldricWrapperList}" var="aldricWrap">
+           <apex:column headerValue="Action">
+                <apex:inputCheckbox value="{!aldricWrap.selected}"/>
+            </apex:column>
+            <apex:column headerValue="Account Name">
+                <apex:outputText value="{!aldricWrap.accountRecord.Name}"/>
+            </apex:column>
+            <apex:column >
+                <apex:pageBlockTable value="{!aldricWrap.contactList}" var="contactList" >
+                        <apex:column headerValue="Contact First Name">    
+                            {!contactList.FirstName}   
+                        </apex:column>
+                    </apex:pageBlockTable>
+            </apex:column>
+        </apex:pageblockTable>
+        
+        
+        <apex:commandButton value="Select" reRender="selectedTable"  action="{!selectedAccount}"/>
+        
+        <apex:outputPanel id="selectedTable">
+            <apex:pageblock >
+                <apex:pageblockTable value="{!accountList}" var="selectedAccount">
+                            <apex:column >
+                                {!selectedAccount.Name}
+                            </apex:column>
+                
+                </apex:pageblockTable>
+            </apex:pageblock>
+        </apex:outputPanel>
+        
+        
+    </apex:pageBlock>
+</apex:form>
+
+</apex:page>

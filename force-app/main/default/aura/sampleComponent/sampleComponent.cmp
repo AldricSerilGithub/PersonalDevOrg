@@ -1,0 +1,12 @@
+<aura:component controller="sampleController">
+    <ltng:require styles="{!$Resource.SLDS221 +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="myAccount" type="Account"/>
+    <aura:attribute name="myName" type="String" default="sForce"/>
+    <div class="slds">
+    	<p>Welcome! {!v.myAccount.Name}</p>
+        {!v.myName}
+    	<button label="Click Me!" name="{!v.myName}" onclick="{!c.clickMe}" class="slds-button slds-button--brand slds-button--destructive"> Click Me</button>
+    </div>   
+    <c:childComponent childName="{!v.myName}"/>
+</aura:component>

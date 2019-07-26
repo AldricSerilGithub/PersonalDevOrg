@@ -1,0 +1,220 @@
+<apex:page controller="ST_ManageUsersController" showHeader="False">
+    <apex:stylesheet value="{!URLFOR($Resource.bootstrap, 'bootstrap/css/bootstrap.css')}" />
+  <style type="text/css">
+  
+  body{
+        background:darkgray;
+        font-family:'Open Sans',sans-serif;
+    }
+    
+    form {
+        background:#f0f0f0;
+        padding:2% 3%;
+        overflow:auto;
+        max-height: none;
+           }
+    
+    body .bPageTitle .ptBody {
+        background-color: lavender;
+        color: black;
+        padding: 0;
+    }
+  
+    div.questionBox {
+        width:500px;
+        border:5px;
+        margin-left:100px;
+        margin-top:20px
+    }
+    div.footer {
+        width:500px;
+        border:5px;
+        margin-left:200px;
+        margin-top:20px        
+    }
+        /* CSS Document */
+        h2.mainTitle{
+            font-size: 1.7em;
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .Custom55Tab .secondaryPalette, .individualPalette .Custom55Block .secondaryPalette {
+            background-color: #9e4fa5;
+            border-color: transparent;
+        }
+        .bPageBlock .pbTitle {
+            vertical-align: middle;
+            color: #222;
+            font-size: 118%;
+            width: 30%;
+            margin: 0;
+        }
+        body{
+            font-size:12px;
+        }
+        .full-width {
+            width: auto;
+        }
+        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            vertical-align: middle;
+        
+        }
+        
+        .table-bordered > tfoot > tr > td {
+            border:2px solid #d3d3d3;
+            width: 100px;
+        }
+        ul li, ol li {
+            margin-left: 0em;
+            padding-left: 0;
+        }
+        
+        
+        .nav-tabs>li>a {
+                  background-color: #d3d3d3; 
+                  border-color: #f5f5f5;
+                  margin-right: 1px;
+                  color:black;
+                }
+                /* active tab color */
+                .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+                  color: black;
+                  font-weight:bold;
+                  margin-right: 1px;
+                  background-color: #fff;
+                  
+                }
+                /* hover tab color */
+                .nav-tabs>li>a:hover {
+                  color: black;
+                  border-color: #f5f5f5;
+                  margin-right: 1px;
+                  background-color: #939393;
+                }  
+      
+        /**START - TABLE COLOR SCHEME**/
+        thead.workplan{
+            background: #C6E2FF;
+
+        }
+        thead.dateHead{
+            background: #26466D;
+            color:#ffffff;
+        }
+
+        .table-hover > tbody > tr.planWP:hover > td, .table-hover > tbody > tr.planWP:hover > th tr.planWP:hover{
+            background: #e9e7d8 !important;
+            color: #2d2d2d;
+        }
+        
+        tr.planWP > .selected-td{
+            background: #e9e7d8 !important;
+            color: #2d2d2d;
+        }
+
+        .table > tbody > tr.totalEffortRow > td.totalEffortHours, .table > tbody > tr.totalEffortRow > td{
+            background: #BCD2EE;
+        }
+
+        /**END - TABLE COLOR SCHEME**/
+    .table { marging-bottom: 0px; border-collapse:separate; border-top: 3px solid grey; }
+
+    .scrollTableContainer {
+        overflow: auto;
+        padding-bottom:1px;
+    }
+    .headcol {
+        position:absolute;
+        left:0;
+        top:auto;
+        border-right: 0px none black;
+        border-top-width:3px; /*only relevant for first row*/
+        margin-top:-3px; /*compensate for top border*/
+    }
+    </style>
+    <apex:pageMessages />
+    <apex:sectionHeader title="Manage Survey Taker" />
+    <apex:form >
+        <apex:outputPanel id="trTable">
+        <apex:pageBlock >
+        <apex:pageblockButtons location="top">
+            <apex:commandButton value="Update Records" action="{!updateAll}"/>
+        </apex:pageblockButtons>
+        <div class="scrollTableContainer">
+            <table style="margin-bottom: 0px" border="1" cellspacing="0" class="table table-bordered table-striped table-hover table-condensed">
+            <thead>
+                <tr>
+                <th>Action</th>
+                <th class="dataOut">Resource EID</th>
+                <th class="dataOut">Email</th>
+                <th class="dataOut">Available Survey Types</th>
+                </tr>
+            </thead>
+            <tbody>
+            <apex:repeat value="{!trList}" var="tr">
+            <tr>
+                <td class="action" style="font-weight: bold; color: blue"><a href="#manageUser"> <apex:outputText value="Manage"><apex:ActionSupport event="onclick" rerender="edit"/></apex:outputText></a></td>
+                <td class="dataOut">{!tr.eid}</td>
+                <td class="dataOut">{!tr.email}</td>
+               <td class="dataOut">{!tr.surveyType}</td>
+            </tr>            
+            </apex:repeat>
+            </tbody>
+            </table>
+        </div> 
+        </apex:pageBlock>
+        </apex:outputPanel>
+        <div id="manageUser" class="manageUser">
+        <apex:outputPanel id="Edit">
+            <apex:pageBlock Title="Resource Edit Section">
+                <table style="margin-bottom: 0px" border="1" cellspacing="0" class="table-bordered table-striped table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Resource EID</th>
+                        <th>Select Survey Types</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tr>
+                <th><apex:inputText onchange="changeInput()" onkeydown="changeInput()" onkeyup="changeInput()" style="width:200px" id="trKo" value="{!selectedTranscript}"/></th>
+                <th><apex:selectList value="{!selectedTypes}" multiselect="true" size="4">
+                    <apex:selectOptions value="{!surveyList}"/>
+                </apex:selectList></th>
+                <th><apex:commandButton value="Update Record" action="{!updateTranscript}" /></th>
+                </tr>
+                </table>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        </div>
+
+   </apex:form>
+
+   <script>
+        $(document).ready(function(){
+                
+                getSomething(".table");
+                $(".manageUser").hide();
+
+        }); 
+        var nthColumn;
+        function getSomething(tableSelector){
+            
+            $(tableSelector).find('tbody tr td.action').click(function(){
+                nthColumn = $(this).parents('tr').find('td:nth-child(3)').text();
+                //nthColumn = $(this).find('td:nth-child(3)').text();
+                $(".manageUser").show();
+                $("input[id*='selectedTranscript']").val(nthColumn);
+                $("input[id*='trKo']").val(nthColumn);
+            });
+           
+        
+        }
+         function changeInput(){
+                $("input[id*='trKo']").val(nthColumn);
+         }
+         
+         
+   </script>
+   <apex:includeScript value="{!URLFOR($Resource.bootstrap, 'bootstrap/js/jquery-1.10.2.js')}"/>
+   <apex:includeScript value="{!URLFOR($Resource.bootstrap, 'bootstrap/js/bootstrap.min.js')}"/>
+</apex:page>

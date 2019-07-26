@@ -1,0 +1,19 @@
+<apex:page sidebar="false" controller="GetterAndSetterSample" extensions="aldricTest">
+
+<apex:form >
+    <apex:pageblock >
+        Welcome {!FirstName}!<br/>
+        Account Name <apex:inputText label="Account Name" value="{!accountRecord.Name}"/>
+        
+        <apex:pageblockTable value="{!AccountList}" var="accountRecord">
+            <apex:column value="{!accountRecord.Name}"/>
+        
+        
+        </apex:pageblockTable>
+        
+        
+        <apex:commandButton action="{!saveButton}" value="Set"/>
+    </apex:pageblock>
+</apex:form>
+
+</apex:page>

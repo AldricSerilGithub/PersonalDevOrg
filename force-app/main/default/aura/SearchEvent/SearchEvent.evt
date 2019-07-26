@@ -1,0 +1,8 @@
+<!--<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="term" type="String"/>    
+</aura:event>-->
+
+
+<aura:event type="COMPONENT" description="Event template" >
+    <aura:attribute name="term" type="String"/>    
+</aura:event>

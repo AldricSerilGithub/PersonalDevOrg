@@ -1,0 +1,13 @@
+<apex:page standardController="Account" sidebar="false">
+    
+    <apex:relatedList list="Opportunities"/>
+    <apex:relatedList subject="{!account}" list="Contacts"/>
+    <apex:relatedList subject="{!account}" list="Cases"/>
+    <apex:relatedList subject="{!account}" list="OpenActivities"/>
+    <apex:relatedList subject="{!account}" list="ActivityHistories" />
+    <apex:relatedList subject="{!account}" list="CombinedAttachments"/>
+    <apex:relatedList subject="{!account}" list="AccountPartnersFrom"/>
+    
+    
+    
+</apex:page>

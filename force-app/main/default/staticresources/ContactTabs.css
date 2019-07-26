@@ -1,0 +1,18 @@
+.rich-tab-active {
+	background-color: #56458C; 
+	color: white; 
+	background-image: none; 
+	font-size: 110%; 
+	font-weight: bold;
+}
+
+.rich-tab-inactive { 
+	background-color: #D3D3D3; 
+	color: black; 
+	background-image: none; 
+	font-size: 110%;
+}
+
+.tabPanelTopGap {
+	margin-top: 10px;
+}

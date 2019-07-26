@@ -1,0 +1,19 @@
+<apex:page StandardController="Account">
+
+    <apex:form >
+        <apex:pageblock >
+            <apex:pageblockSection >
+                <apex:inputField value="{!Account.Name}"/>
+                
+            </apex:pageblockSection>
+            <center>
+                <apex:commandButton value="Save Record" action="{!save}"/>
+                <apex:commandLink value="Cancel" action="{!cancel}"/>
+            </center>
+        </apex:pageblock>
+    </apex:form>
+
+<apex:detail />
+
+
+</apex:page>

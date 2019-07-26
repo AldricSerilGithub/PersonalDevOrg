@@ -1,0 +1,3 @@
+<aura:component >
+	<c:svgIcon svgPath="/resource/slds221/assets/icons/action-sprite/svg/symbols.svg#new_account" category="standard" size="large" name="user" />
+</aura:component>

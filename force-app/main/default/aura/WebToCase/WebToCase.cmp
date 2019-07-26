@@ -1,0 +1,61 @@
+<aura:component >
+<!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+<!--  If necessary, please modify the charset parameter to specify the        -->
+<!--  character set of your HTML page.                                        -->
+
+<!--<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">-->
+
+<!--  NOTE: Please add the following <FORM> element to your page.             -->
+    <body>
+
+<form action="https://woolworths--Accdev3.cs72.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+
+    <input type="hidden" name="orgid" value="00D5D000000CqDu"/>
+    <input type="hidden" name="retURL" value="https://accdev3-wowlink.cs72.force.com"/>
+        
+<!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+<!--  these lines if you wish to test in debug mode.                          -->
+<!--  <input type="hidden" name="debug" value=1>                              -->
+<!--  <input type="hidden" name="debugEmail"                                  -->
+<!--  value="jaldricseril@woolworths.com.au">                                 -->
+<!--
+    <label for="subject">Subject</label><input class="slds-input"  id="subject" maxlength="80" name="subject" size="20" type="text" /><br/>
+
+    <label for="description">Description</label><textarea class="slds-input" name="description"></textarea><br/>
+
+    <label for="email">Email</label><input class="slds-input" id="email" maxlength="80" name="email" size="20" type="text" /><br/>
+
+    <label for="phone">Phone</label><input class="slds-input" id="phone" maxlength="40" name="phone" size="20" type="text" /><br/>
+
+    <input type="hidden"  id="external" name="external" value="1" class="slds-input"/><br/>
+
+    <input type="submit" name="submit" class="slds-input"/>
+-->   
+    <label for="subject">Subject</label><input class="slds-input" id="subject" maxlength="80" name="subject" size="20" type="text" /><br/>
+
+    <label for="description">Description</label><textarea class="slds-input" name="description"></textarea><br/>
+
+    <label for="company">Company</label><input class="slds-input" id="company" maxlength="80" name="company" size="20" type="text" /><br/>
+
+    First Name:<input class="slds-input" id="00N5D000000wanZ" maxlength="50" name="00N5D000000wanZ" size="20" type="text" /><br/>
+
+    Last Name:<input class="slds-input" id="00N5D000000wane" maxlength="50" name="00N5D000000wane" size="20" type="text" /><br/>
+
+    <label for="phone">Phone</label><input class="slds-input" id="phone" maxlength="40" name="phone" size="20" type="text" /><br/>
+
+    <label for="email">Email</label><input class="slds-input" id="email" maxlength="80" name="email" size="20" type="text" /><br/>
+
+    <input type="hidden" id="recordType" name="recordType" value="0125D0000000Nqh"/>
+
+    <input type="hidden"  id="external" name="external" value="1" /><br/>
+	
+    <button type="submit" name="submit" class="slds-button slds-button_neutral">Submit</button>
+    
+
+    
+        
+</form>
+ </body>
+<!--</META>    -->
+
+</aura:component>

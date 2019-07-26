@@ -1,0 +1,22 @@
+.THIS th {
+    color : black;
+    margin: 1em;
+    padding: 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Fredericka the Great', 'Frijole';
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    line-height: 1em;
+}
+
+.THIS h1 {
+    color: white;
+    margin: 1em;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-family: 'Fredericka the Great', 'Frijole';
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    
+}

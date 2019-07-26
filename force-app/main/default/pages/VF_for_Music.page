@@ -1,0 +1,71 @@
+<apex:page standardController="Lead" showHeader="false" sidebar="false" tabStyle="lead" >
+<link href='https://fonts.googleapis.com/css?family=Ravie' rel='stylesheet' type='text/css' />
+    
+  <style>
+      .alef1 {
+        font-family: 'Alef', serif;
+        font-size: 24px;
+      }
+      
+      .alef2 {
+        font-family: 'Alef', serif;
+        font-size: 14px;
+      }
+         
+   
+       .activeTab {background-color: #1798c1 ; font-family: 'Alef';font-style: Italic; color:white; width: 100px; height: 23px; padding-top:2px; font-size: 15px; font-style:'Alef'; border:0px;
+         background-image:none; border-radius: 10px;}
+
+      .inactiveTab {background-color: #1798c1 ; font-family: 'Alef'; font-style: Italic; color:white; width: 100px; height: 15px; padding-top:2px; font-size: 15px; font-style:bold; border:0px;
+         background-image:none; border-radius: 10px;}
+    </style>
+    
+    <div class="alef1"><i>Attach your favorite Music using the attach file button</i></div><br/>
+    <div class="alef2"><i><marquee>***Note: Only .mp3 format are supported</marquee></i></div><br/>
+<apex:tabPanel switchType="client" selectedTab=" tabdetails" id="LeadTabPanel" tabClass="activeTab" inactiveTabClass="inactiveTab" contentStyle="font-family: Poiret One;">  
+ 
+<apex:tab label="Play Here" name="LeadDetails">
+<apex:page standardController="Lead">
+</apex:page>
+<apex:page standardController="Lead" id="pg" extensions="PlayAudio" sidebar="true">
+<apex:includeScript value="{!URLFOR($Resource.AudioPlayer, 'audio-player/audio-player.js')}"/>
+<script type="text/javascript">  
+     AudioPlayer.setup("{!URLFOR($Resource.AudioPlayer, 'audio-player/player.swf')}", {  
+         width: 400  
+     });  
+</script> 
+
+<script type="text/javascript">  
+    function playAudio(LeadObj)
+        {
+            AudioPlayer.embed("audioplayer_1", {soundFile: LeadObj});
+        }  
+</script>
+<apex:form id="frm">
+    <apex:pageBlock id="pb">
+        <apex:variable value="{!0}" var="count" />
+        <apex:pageBlockTable value="{!listAttachment}" var="item" id="pbt">
+            <apex:column headerValue="Title">
+            
+                {!item.Name}
+            </apex:column>
+            
+            <apex:column id="colPlayer" rendered="{!CONTAINS(item.ContentType, 'audio')}">
+                <p id="{!count}.audioplayer"></p>
+                <script type="text/javascript">
+                    AudioPlayer.embed("{!count}.audioplayer", {soundFile: 'https://aldrictraining-dev-ed.my.salesforce.com/servlet/servlet.FileDownload?file={!item.Id}'});
+                </script>
+                <apex:variable value="{!count+1}" var="count" />
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>
+</apex:tab>
+<apex:tab label="Attach Here" name="NotesAndAttachments" id="tabNoteAtt">
+
+         <apex:relatedList subject="{!Lead}" list="CombinedAttachments" />
+
+      </apex:tab>
+</apex:tabPanel>
+</apex:page>

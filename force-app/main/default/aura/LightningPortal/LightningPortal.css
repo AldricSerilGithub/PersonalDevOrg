@@ -1,0 +1,13 @@
+.THIS .images {
+    background: url(/resource/lightningImages/lightningImages/images.png) no-repeat;
+    background-size: contain;
+    background-color: rgb(11, 88, 165); 
+    width:39px;
+	height:39px;
+    border-radius:1000px;
+    padding: 2.5px;
+    border: 2px;
+    border-color: white;
+    border-style: solid;
+    
+}

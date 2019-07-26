@@ -1,0 +1,322 @@
+<apex:page standardController="Quote" Extensions="QuoteExtensions" recordSetVar="quotes" showheader="False" sidebar="False" >
+
+
+    
+
+
+
+
+    <apex:form >
+    <apex:variable var="cnt1" value="{!0}" />
+    <apex:variable var="cnt2" value="{!0}" />
+    <apex:variable var="cnt3" value="{!0}" /> 
+    
+   
+    
+        <apex:pageBlock title="Quote Line Items (Standard Price Book)">
+            <apex:commandButton action="{!URLFOR($Action.QuoteLineItem.AddQuoteLine)}" value="Add Line Item"/>
+            <apex:commandButton value="Edit Header Quantity"/>
+            <table style="width:100%">
+                <tr>
+                    <th>Action</th>
+                    <th>Product</th>
+                    <th>Sales Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Discount</th>
+                    <th>Total Price</th>
+                    <th>List Price</th>
+                    <th>Header Level</th>
+
+                </tr>
+            <apex:repeat value="{!quotesList}" var="quoteLineItem">                        
+                  
+                
+                <apex:outputPanel rendered="{!IF(quoteLineItem.Header_Level__c == '1',True, False)}">
+                    <apex:variable var="cnt1" value="{!cnt1+1}" />
+                    
+                    <apex:outputPanel rendered="{!IF(cnt1==1,True, False)}">
+                       <tr>
+                           <td>
+                           </td>
+                           
+                           <td>
+                           <b>Header 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Item Price</b>
+                           </td>
+                           
+                       </tr>
+                    </apex:outputPanel>   
+                   <tr>
+                       <td>
+                           <apex:facet name="header">
+                               <apex:outputPanel >
+                                   <apex:outputText value="Action"/>
+                               </apex:outputPanel>
+                           </apex:facet>
+                           
+                           <!--                         
+                           <apex:commandLink action="{!editQuoteLineItemRecord(quoteLineItem.ID, quoteLineItem.QuoteId)}">
+                               Edit
+                           </apex:commandLink>
+                           &nbsp;
+                          
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Delete, quoteLineItem.QuoteId) }">
+                               Del 
+                           </apex:outputLink>
+                           
+                           -->
+                       </td>
+                  
+                        <td>
+                            <apex:facet name="header">Products</apex:facet>
+                            <apex:commandLink action="/{!quoteLineItem.Product2.Id}" value="{!quoteLineItem.Product2.Name}" /> 
+                        </td>
+                        
+                        <td>
+                            {!quoteLineItem.UnitPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Quantity}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Subtotal}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Discount}
+                        </td>
+                        <td>
+                            {!quoteLineItem.TotalPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.ListPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Header_Level__c}
+                        </td>
+                        
+                        </tr>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!IF(quoteLineItem.Header_Level__c == '2',True, False)}">
+                       <apex:variable var="cnt2" value="{!cnt2+1}" />
+                    <apex:outputPanel rendered="{!IF(cnt2==1,True, False)}">
+                       <tr>
+                           <td>
+                           </td>
+                           
+                           <td>
+                           <b>Header 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Item Price</b>
+                           </td>
+                           
+                       </tr>
+                    </apex:outputPanel>   
+                   <tr>
+                       <td>
+                           <apex:facet name="header">
+                               <apex:outputPanel >
+                                   <apex:outputText value="Action"/>
+                               </apex:outputPanel>
+                           </apex:facet>
+                    
+                           <!--
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Edit, quoteLineItem.QuoteId) }">
+                               Edit
+                           </apex:outputLink>
+                           
+                           &nbsp;
+                           
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Delete, quoteLineItem.QuoteId) }">
+                               Del 
+                           </apex:outputLink>
+                           
+                           -->
+                       </td>
+                  
+                        <td>
+                            <apex:facet name="header">Products</apex:facet>
+                            <apex:commandLink action="/{!quoteLineItem.Product2.Id}" value="{!quoteLineItem.Product2.Name}" /> 
+                        </td>
+                        
+                        <td>
+                            {!quoteLineItem.UnitPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Quantity}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Subtotal}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Discount}
+                        </td>
+                        <td>
+                            {!quoteLineItem.TotalPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.ListPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Header_Level__c}
+                        </td>
+                        
+                        </tr>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!IF(quoteLineItem.Header_Level__c == '3',True, False)}">
+                   <apex:variable var="cnt3" value="{!cnt3+1}" />
+                    <apex:outputPanel rendered="{!IF(cnt3==1,True, False)}">
+                       <tr>
+                           <td>
+                           </td>
+                           
+                           <td>
+                           <b>Header 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Item Price</b>
+                           </td>
+                           
+                       </tr>
+                    </apex:outputPanel>   
+                   <tr>
+                       <td>
+                           <apex:facet name="header">
+                               <apex:outputPanel >
+                                   <apex:outputText value="Action"/>
+                               </apex:outputPanel>
+                           </apex:facet>
+                    
+                           <!--
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Edit, quoteLineItem.QuoteId) }">
+                               Edit
+                           </apex:outputLink>
+                           
+                           &nbsp;
+                           
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Delete, quoteLineItem.QuoteId) }">
+                               Del 
+                           </apex:outputLink>
+                           
+                           -->
+                       </td>
+                  
+                        <td>
+                            <apex:facet name="header">Products</apex:facet>
+                            <apex:commandLink id="Product2" action="/{!quoteLineItem.Product2.Id}" value="{!quoteLineItem.Product2.Name}" /> 
+                        </td>
+                        
+                        <td>
+                            {!quoteLineItem.UnitPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Quantity}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Subtotal}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Discount}
+                        </td>
+                        <td>
+                            {!quoteLineItem.TotalPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.ListPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItem.Header_Level__c}
+                        </td>
+                        
+                        </tr>
+                    </apex:outputPanel>
+                </apex:repeat>
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+    
+  
+                
+    <apex:form >
+    
+    <table style="width:100%">
+                <tr>
+                    <th>Action</th>
+                    <th>Product</th>
+                    <th>Sales Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Discount</th>
+                    <th>Total Price</th>
+                    <th>List Price</th>
+                    <th>Header Level</th>
+
+                </tr>
+        <apex:repeat value="{!keys}" var="key">
+             <apex:variable var="cnt1" value="{!0}" /><br/>
+                    <apex:repeat value="{!quoteLineItemMap[key]}" var="quoteLineItmRec">
+                    <apex:variable var="cnt1" value="{!cnt1+1}" />
+                        
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            <apex:outputpanel rendered="{!IF(cnt1==1,True, False)}">
+                               <b> Header {!key}</b>
+                               
+                            </apex:outputpanel>
+                            </td>   
+                        </tr>
+                        <tr>     
+                        <td>
+                           <apex:facet name="header">
+                               <apex:outputPanel >
+                                   <apex:outputText value="Action"/>
+                               </apex:outputPanel>
+                           </apex:facet>
+                           
+                           <!--                         
+                           <apex:commandLink action="{!editQuoteLineItemRecord(quoteLineItem.ID, quoteLineItem.QuoteId)}">
+                               Edit
+                           </apex:commandLink>
+                           &nbsp;
+                          
+                           <apex:outputLink value="{! URLFOR($Action.QuoteLineItem.Delete, quoteLineItem.QuoteId) }">
+                               Del 
+                           </apex:outputLink>
+                           
+                           -->
+                       </td>
+                  
+                        <td>
+                            <apex:facet name="header">Products</apex:facet>
+                            <apex:commandLink action="/{!quoteLineItmRec.Product2.Id}" value="{!quoteLineItmRec.Product2.Name}" /> 
+                        </td>
+                        
+                        <td>
+                            {!quoteLineItmRec.UnitPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.Quantity}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.Subtotal}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.Discount}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.TotalPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.ListPrice}
+                        </td>
+                        <td>
+                            {!quoteLineItmRec.Header_Level__c}
+                        </td>
+                        
+                        </tr>
+                
+            </apex:repeat>
+        </apex:repeat>
+        </table>
+    </apex:form>
+
+    
+</apex:page>

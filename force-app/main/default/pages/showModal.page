@@ -1,0 +1,27 @@
+<apex:page standardController="Account" showHeader="false" sidebar="false">
+<apex:includeLightning />
+
+<div id="lightning" />
+
+<script>
+ 
+    
+    $Lightning.use("c:MassAccountApp", function() {
+
+$Lightning.createComponent("c:ModalLightningComponent",
+
+"",
+
+"lightning",
+
+function(cmp) {
+
+// do some stuff
+
+});
+
+});
+    
+    
+</script>
+</apex:page>

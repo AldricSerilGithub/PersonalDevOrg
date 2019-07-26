@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="childName" type="String" />
+    {!v.childName}
+    
+    <aura:attribute name="componentParam" type="String" default="Default Param"/>
+    <c:grandChildComponent grandChildName="{!v.childName}" componentEvent="{!c.catchComponentEvent}"/>
+    {!v.componentParam}
+</aura:component>

@@ -1,0 +1,22 @@
+<apex:page showHeader="false">
+
+    <body onload="myFunction()">
+    
+    
+    </body>
+    
+    <script>
+        function myFunction() {
+            
+            var iframe = document.createElement('iframe');
+            var html = 'https://socialstudio.radian6.com/login';
+            iframe.src = html;
+            iframe.style.height = "500px";
+            iframe.style.width = "100%";
+            document.body.appendChild(iframe);
+            console.log('iframe.contentWindow =', iframe.contentWindow);
+        }
+    </script>
+
+
+</apex:page>

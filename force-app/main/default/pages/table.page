@@ -1,0 +1,58 @@
+<apex:page sidebar="false" standardcontroller="Login__c" extensions="LoginTime,LogoutUpdate,SaveButton" showheader="true" >
+   <i>  <apex:sectionHeader Subtitle="Welcome {!$User.FirstName} {!$User.LastName}" /> </i>
+  <apex:includeScript value="{!$Resource.LoginJS}"/>
+  <apex:includeScript value="{!$Resource.Logout}"/>    
+ <apex:includeScript value="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"/>
+    
+    <script>
+  $(document).ready(function()
+    {
+      $("table").tablesorter({
+        sortList: [[0,1]],
+        headers: {3:{sorter:false}}
+      });
+    }
+  );
+</script>
+
+    <apex:form >
+        <apex:pageblock >
+                <apex:commandButton value="Time In" onClick="return confirmLogin()" action="{!save}" disabled="{!IsLogin}" />
+                <apex:commandButton value="Time Out" onClick="return confirmCancel()" immediate="true" style="margin-left: 2em" action="{!Lout}" disabled="{!IsLogout}"/>  
+                <apex:commandButton value="Generate PDF" style="margin-left: 2em" onClick="window.open('/apex/generat');"/>
+        
+        <center>
+    <apex:dataTable value="{!totalTBO}" var="temp"> 
+       <apex:column >
+          <b> 
+          <font size='4'>
+     <apex:outputText value="Over Time: {!temp['OT']} Hour/s" style="margin-left: 2em"/>
+     <apex:outputText value="Under Time: {!temp['UT']} Hour/s" style="margin-left: 2em"/>
+     <apex:outputText value="Total Time: {!temp['OT']-temp['UT']} Hour/s" style="margin-left: 2em"/>
+           </font>
+           </b>
+           </apex:column>
+       </apex:dataTable>   
+    </center>
+        
+        </apex:pageblock>
+    </apex:form>
+    
+    <apex:pageblock id="Login__c" title="Time In and Time Out History" >
+    
+        <apex:pageblockTable value="{!po}" var="a">
+            <apex:column style="width:150px" value="{!a.Timein__c}"/>
+            <apex:column style="width:150px" value="{!a.Timeout__c}"/>
+            <apex:column style="width:150px" value="{!a.Total_Hours__c}"/>
+            <apex:column style="width:150px" value="{!a.Under_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Over_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Status__c}"/>
+        </apex:pageblockTable>
+        
+        
+    
+        
+
+    </apex:pageblock> 
+</apex:page>

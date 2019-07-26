@@ -1,0 +1,107 @@
+<aura:component controller="MassAccountListController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global" >
+    <ltng:require styles="{!$Resource.SLDS213 +
+                          '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    
+    <aura:attribute name="AccountList" type="Account[]"/>
+    <aura:attribute name="AccountNewList" type="Account[]"/>
+    <aura:attribute name="TypePicklist" type="String[]"/>
+    <aura:attribute name="IndustryPicklist" type="String[]"/>
+    <aura:attribute name="TypeSelected" type="String"/>
+    <aura:attribute name="IndustrySelected" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <style type="text/css">
+    html{
+        background: url("http://hdimages.org/wp-content/uploads/2016/11/html-background-image-HD1-1.jpg") no-repeat center center fixed; 
+   
+        }
+    </style>
+    
+    <div class="slds">
+        <div class="slds-page-header" role="banner">
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <h1 class="slds-text-heading--medium">
+                        <c:svgIcon svgPath="/resource/slds221/assets/icons/action-sprite/svg/symbols.svg#new_account" category="standard" size="large" name="account" />
+                        
+                        Accounts</h1>
+                </div>
+                
+                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                    <button class="slds-button slds-button--neutral " aura:id="createButton" onclick="{!c.showModal}">New Account</button>
+                </div>
+            </div>
+        </div>
+        
+        
+        <center>
+            <c:MassAccountList AccountList="{!v.AccountList}" AccountListEvent="{!c.deleteAccount}"/>
+            <br/>
+            <button class="slds-button slds-button--brand" aura:id="saveButton" onclick="{!c.massAccountSave}">Save</button>
+            <button class="slds-button slds-button--destructive"  aura:id="cancelButton" onclick="{!c.closeWindow}">Cancel</button>
+        </center> 
+        
+        <div aria-hidden="false" id="modalWindow" role="dialog" class="slds-modal slds-modal--small slds-fade-in-open" style="display:none;">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h2 id="header" class="slds-text-heading--medium">Add New Account Record</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <div>
+                        <form class="slds-form--stacked">
+                            <div class="slds-form-element slds-is-required">
+                                <div class="slds-form-element__control">
+                                    <ui:inputText aura:id="accName" label="Account Name"
+                                                  class="slds-input"
+                                                  labelClass="slds-form-element__label"
+                                                  required="true"
+                                                  />
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-is-required">
+                                <div class="slds-form-element__control">
+                                    <ui:inputNumber aura:id="accPhone" label="Phone"
+                                                    class="slds-input"
+                                                    labelClass="slds-form-element__label"
+                                                    required="true"
+                                                    />
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-is-required">
+                                <div class="slds-form-element__control">
+                                    <ui:inputSelect class="slds-input" label="Type" required="true" labelClass="slds-form-element__label" aura:id="InputSelectType" change="{!c.onSelectChangeType}">
+                                            <ui:inputSelectOption text="-None-"/>
+                                        <aura:iteration items="{!v.TypePicklist}" var="TypePickString">
+                                            <ui:inputSelectOption text="{!TypePickString}"/>
+                                        </aura:iteration>
+                                    </ui:inputSelect>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-is-required">
+                                <div class="slds-form-element__control">
+                                    <ui:inputSelect class="slds-input" label="Industry" required="true" labelClass="slds-form-element__label" aura:id="InputSelectIndustry" change="{!c.onSelectChangeIndustry}">
+                                            <ui:inputSelectOption text="-None-"/>
+                                        <aura:iteration items="{!v.IndustryPicklist}" var="IndustryPickString">
+                                            <ui:inputSelectOption text="{!IndustryPickString}"/>
+                                        </aura:iteration>
+                                    </ui:inputSelect>
+                                </div>
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <ui:button class="slds-button slds-button--brand" label="Add" press="{!c.addAccount}"/>  
+                    <button class="slds-button slds-button--destructive" onclick="{!c.hideModal}">Cancel</button>  
+                </div>
+            </div>
+        </div>
+        <div id="overLay" style="visibility:hidden;" class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+    <br/>
+                <br/>
+                <br/>
+                <br/>
+</aura:component>

@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/audio-player": [
+                "../staticresources/AudioPlayer/audio-player/audio-player.js"
+            ],
+            "c/ckeditor": [
+                "../staticresources/ckEditor/ckeditor/ckeditor.js"
+            ],
+            "c/codemirror": [
+                "../staticresources/ckEditor/ckeditor/samples/toolbarconfigurator/lib/codemirror/codemirror.js"
+            ],
+            "c/leaflet": [
+                "../staticresources/leaflet/leaflet.js"
+            ],
+            "c/helloWorld2": [
+                "helloWorld2/helloWorld2.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+<apex:page standardController="Account" sidebar="false" showHeader="false" extensions="BootcampTrainingController,aldricExtension">  
+    <apex:form >
+        <apex:pageblock >        
+            <apex:pageblockSection title="Account Information" >
+                 <apex:inputfield value="{!accountRecord.Name}" />
+                 <apex:inputfield value="{!accountRecord.BillingCity}" />
+                 <apex:inputfield value="{!accountRecord.BillingPostalCode}" />
+
+            </apex:pageblockSection>        
+            <apex:pageblockSection title="Contact Information" >
+                 <apex:inputfield value="{!contactRecord.firstName}" />
+                 <apex:inputfield value="{!contactRecord.lastName}" />
+            </apex:pageblockSection>
+            <apex:pageblockButtons >
+                <apex:commandButton value="Save" action="{!save}" />
+                <apex:commandButton value="Cancel" action="{!cancel}" />
+                <apex:commandButton value="Aldric Button" action="{!aldric}" />
+            </apex:pageblockButtons>
+        </apex:pageblock>
+        
+    </apex:form>  
+</apex:page>

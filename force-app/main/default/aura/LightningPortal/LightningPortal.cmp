@@ -1,0 +1,45 @@
+<aura:component >
+    
+    <aura:attribute name="Username" type="String"/>
+    <aura:attribute name="Password" type="String"/>
+    
+    <fieldset class="slds-box slds-theme--default slds-container--small slds-align--absolute-center" >
+
+    <legend id="loginPage" class="slds-text-heading--small slds-p-vertical--medium">
+      Log In
+    </legend>
+
+    
+	<form class="slds-form--stacked" onkeyup="{!c.buttonPress}">
+	    <div class="slds-form-element">
+        	<div class="slds-form-element__control">
+            	<ui:inputText aura:id="UsernameId" label="Username"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.Username}"
+                  placeholder="Username"/>
+        	</div>
+      	</div>
+        
+        <div class="slds-form-element">
+        	<div class="slds-form-element__control">
+            	<ui:inputSecret aura:id="PasswordId" label="Password"
+                  class="slds-input"
+                  labelClass="slds-form-element__label"
+                  value="{!v.Password}"
+                  placeholder="Password"/>
+        	</div>
+      	</div>
+        
+        <div class="slds-form-element">
+        	<ui:button class="images"
+              press="{!c.buttonClicked}"
+            >
+                
+            </ui:button>
+      	</div>
+
+    </form>
+        
+    </fieldset>
+</aura:component>

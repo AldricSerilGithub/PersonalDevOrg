@@ -1,0 +1,57 @@
+<apex:page controller="Setup360ViewController">
+<apex:sectionHeader title="Setup 360 View" subtitle="Choose 360 View Objects and Fields" />
+<apex:pageMessages ></apex:pageMessages>
+<apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection collapsible="true" columns="1" title="Select Object and Field">
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Select Object"/>
+                <apex:selectList value="{!objectName}" id="objN" size="1">
+                    <br />
+                    <apex:selectOptions value="{!objects}" />
+                    <apex:actionSupport event="onchange" rerender="optionid,caseOptionId,dateOptionId"/>
+                </apex:selectList>
+            </apex:pageBlockSectionItem>
+            <apex:pageblockSectionItem >
+                <apex:outputlabel value="Select Case Pointer Field"/>
+                <apex:selectList value="{!caseFieldName}" id="caseOptionId" size="1">
+                    <br />
+                    <apex:selectOptions value="{!caseFields}" />
+                </apex:selectList>
+            </apex:pageblockSectionItem>
+            <apex:pageblockSectionItem >
+                <apex:outputlabel value="Select Date Field (for sorting)"/>
+                <apex:selectList value="{!dateFieldName}" id="dateOptionId" size="1">
+                    <br />
+                    <apex:selectOptions value="{!dateFields}" />
+                </apex:selectList>
+            </apex:pageblockSectionItem>
+            <apex:pageblockSectionItem >
+                <apex:outputlabel value="Select Field"/>
+                <apex:selectList value="{!fieldName}" id="optionid" size="1">
+                    <br />
+                    <apex:selectOptions value="{!fields}" />
+                </apex:selectList>
+            </apex:pageblockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Select Sort Order"/>
+                <apex:inputText value="{!sortOrder}" id="sortOrder" />
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        
+        <apex:repeat value="{!selectedObjects}" var="selectedObject">
+            <apex:pageBlock title="{!selectedObject.Name}">
+            <!--apex:pageBlockTable value="{!selectedObject.X360_View_Fields__r}" var="selectedFields"-->
+            <apex:pageBlockTable value="{!selectedObject.Case_View_Fieldss__r}" var="selectedFields">
+                <apex:column value="{!selectedFields.Name}" />
+                <apex:column value="{!selectedFields.Case_View_Object__c}" />
+                <apex:column value="{!selectedFields.Field__c}" />
+            </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:repeat>
+        
+        <apex:commandButton value="Save" action="{!save360Field}"/>
+        <apex:commandButton value="Cancel" action="{!cancel}"/>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

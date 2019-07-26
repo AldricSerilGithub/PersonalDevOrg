@@ -1,0 +1,25 @@
+<aura:component controller="serverController">
+    
+     <aura:attribute name="accountList" type="Account[]"/>
+     <aura:handler name="init" value="{!this}" action="{!c.aldric}" />
+	<table>
+        <th>
+            <lightning:icon iconName="custom:custom1" size="large"/>
+            Account Name
+        </th>
+        <th>
+            Billing Address
+        </th>
+
+    	<aura:iteration var="lightning" items="{!v.accountList}">
+    		<tr>
+            	<td>
+                	{!lightning.Name}
+            	</td>
+                <td>
+                	{!lightning.BillingCity}
+            	</td>
+        	</tr>
+    </aura:iteration>    
+	</table>
+</aura:component>

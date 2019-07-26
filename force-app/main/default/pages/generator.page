@@ -1,0 +1,7 @@
+<apex:page sidebar="False" standardStylesheets="false">
+<apex:stylesheet value="{!URLFOR($Resource.myStyles, 'customStyles.css')}"/>
+<center>
+  <apex:pageblock >Choose Resource Name: </apex:pageblock>
+</center>
+
+</apex:page>

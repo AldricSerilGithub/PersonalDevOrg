@@ -1,0 +1,147 @@
+<apex:page StandardController="ExchangeGift__c" extensions="ExchangeGiftPickerController" showHeader="False" sidebar="false">
+  <head>
+      <link rel="stylesheet" href="css/style.css"/>
+      <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system.css')}" />
+      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Cookie" />
+  </head>
+
+<style>
+h1 {
+    font-family: Cookie;
+    font-size: 88px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 43.7px;
+    color: yellow;
+    text-shadow: 3px 3px black;
+}
+
+
+html { 
+            background: url("http://www.youwall.com/wallpapers/201511/christmas-gifts-balls-wallpaper.jpg") no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+canvas{
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+
+</style>
+
+<div class="slds" >
+    <canvas></canvas>
+    <div align="Center" style="padding-top: 25%;max-width: 100%">
+        <h1>Wishlist</h1>
+    </div>
+
+    <div  style="padding-top: 2%; padding-left: 30%; min-width: 100px; padding-right: 30%; max-width: 100%" >
+    <div class="modal-dialog slds" style="margin-bottom:0">
+        <div class="modal-content">
+            <div class="slds-form-element">
+                <apex:form styleclass="slds-form--stacked" >
+                    <form role="form">
+                        
+                        <div class="slds-form-element__control" style="padding-bottom: 1%">
+                            <apex:inputtextarea rows="5" disabled="True" styleClass="slds-textarea" value="{!exChange.exchangeGift__r.Request_Gift__c} "/>   
+                        </div>
+                        
+                        
+                        <script>
+    text = '{!NamePick}';  // The message displayed
+chars = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ abcdefghijklmnñopqrstuvwxyz-';  // All possible Charactrers
+scale = 60;  // Font size and overall scale
+breaks = 0.003;  // Speed loss per frame
+endSpeed = 0.05;  // Speed at which the letter stopps
+firstLetter = 220;  // Number of frames untill the first letter stopps (60 frames per second)
+delay = 40;  // Number of frames between letters stopping
+
+
+
+canvas = document.querySelector('canvas');
+ctx = canvas.getContext('2d');
+
+text = text.split('');
+chars = chars.split('');
+charMap = [];
+offset = [];
+offsetV = [];
+
+for(var i=0;i<chars.length;i++){
+  charMap[chars[i]] = i;
+}
+
+for(var i=0;i<text.length;i++){
+  var f = firstLetter+delay*i;
+  offsetV[i] = endSpeed+breaks*f;
+  offset[i] = -(1+f)*(breaks*f+2*endSpeed)/2;
+}
+
+(onresize = function(){
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+})();
+
+requestAnimationFrame(loop = function(){
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#00FFFF';
+  ctx.fillRect(0,(canvas.height-scale)/2,canvas.width,scale);
+  for(var i=0;i<text.length;i++){
+    ctx.fillStyle = 'Green';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.setTransform(1,0,0,1,Math.floor((canvas.width-scale*(text.length-1))/2),Math.floor(canvas.height/2));
+    var o = offset[i];
+    while(o<0)o++;
+    o %= 1;
+    var h = Math.ceil(canvas.height/2/scale)
+    for(var j=-h;j<h;j++){
+      var c = charMap[text[i]]+j-Math.floor(offset[i]);
+      while(c<0)c+=chars.length;
+      c %= chars.length;
+      var s = 1-Math.abs(j+o)/(canvas.height/2/scale+1)
+      ctx.globalAlpha = s
+      ctx.font = scale*s + 'px Helvetica'
+      ctx.fillText(chars[c],scale*i,(j+o)*scale);
+    }
+    offset[i] += offsetV[i];
+    offsetV[i] -= breaks;
+    if(offsetV[i]<endSpeed){
+      offset[i] = 0;
+      offsetV[i] = 0;
+    }
+  }
+  
+  requestAnimationFrame(loop);
+});
+    
+    
+    </script>
+
+                        
+                        
+                    </form>
+                </apex:form>
+            </div>
+        </div>
+    </div>
+    </div>  
+</div>
+  
+  
+  
+    
+
+  
+  
+</apex:page>

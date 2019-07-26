@@ -1,0 +1,33 @@
+<apex:page controller="MyBootcampJuly">
+    {!Name}
+    
+    {!positions.Name}
+    <apex:form >
+    <apex:inputText value="{!userInputName }"/>
+    <apex:commandButton value="Check Input" action="{!checkInput}"/>
+    
+    <apex:pageBlock >
+    <table>
+        <apex:repeat value="{!contactAccountList}" var="accountRecord">
+           <tr> 
+            <td><apex:inputCheckBox value="{!accountRecord.isChecked}"/></td>
+            <td>{!accountRecord.Name}</td>
+            
+                <td>
+                <table>
+                <apex:repeat value="{!accountRecord.contactRec}" var="contactRecord">
+                    
+                    <tr>
+                        <td>{!contactRecord.FirstName}</td>
+                     </tr>
+            
+                </apex:repeat>    
+                </table>
+                </td>
+           </tr> 
+        </apex:repeat>
+    </table>    
+    </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

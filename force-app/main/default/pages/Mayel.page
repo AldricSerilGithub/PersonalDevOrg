@@ -1,0 +1,20 @@
+<apex:page sidebar="false" standardController="Login__c" extensions="Mayel">
+
+
+    <apex:form id="Myform">
+     
+     <apex:inputField value="{!Login__c.Timein__c}" >
+     </apex:inputfield>
+    
+     <apex:commandButton value="Add" />    
+     <apex:inputField value="{!Login__c.Timeout__c}" >
+     </apex:inputfield>
+    
+    
+    
+    
+    </apex:form>
+    
+   
+    
+</apex:page>

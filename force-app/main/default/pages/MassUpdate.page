@@ -1,0 +1,63 @@
+<apex:page controller="MassUpdateController" showHeader="False" sidebar="False">  
+
+ <apex:includeScript value="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"/>
+    
+    <script>
+      $(document).ready(function()
+      {
+          $("table").tablesorter({
+          sortList: [[0,0]],
+          headers: {3:{sorter:false}}
+          });
+      });
+    </script>
+
+    <style type="text/css">
+        .blankField{
+            background-color : Pink;
+        }
+        .notEmpty{
+            background-color : lightGreen;
+        }
+        
+        table{
+            width: 100%;
+        }
+        
+    </style>
+    
+  <apex:form >
+      <apex:sectionHeader title="Account List" subtitle="Mass Update"/>
+      <apex:pageblock >
+          <apex:pageblockSection >
+              <apex:pageblockTable value="{!accountList}" var="accountRecord" width="100%">
+                  <apex:column headerValue="Account Name">
+                          <!--<apex:OutputField label="{!accountRecord.Name}" value="{!accountRecord.Name}"/>-->
+                          <apex:OutputLink value="/{!accountRecord.Id}">{!accountRecord.Name}</apex:OutputLink>
+                  </apex:column>
+                  <apex:column headerValue="Billing Street">
+                          <apex:inputField label="{!accountRecord.BillingStreet}" value="{!accountRecord.BillingStreet}" styleClass="{!IF(accountRecord.BillingStreet == null,  'blankField', 'notEmpty')}"/>
+                  </apex:column>
+                  <apex:column headerValue="Billing City">
+                          <apex:inputField label="{!accountRecord.BillingCity}" value="{!accountRecord.BillingCity}" styleClass="{!IF(accountRecord.BillingCity== null,  'blankField', 'notEmpty')}"/>
+                  </apex:column>
+                  <apex:column headerValue="Billing State">
+                          <apex:inputField label="{!accountRecord.BillingState}" value="{!accountRecord.BillingState}" styleClass="{!IF(accountRecord.BillingState == null,  'blankField', 'notEmpty')}"/>
+                  </apex:column>
+                  <apex:column headerValue="Billing Postal Code">
+                          <apex:inputField label="{!accountRecord.BillingPostalCode}" value="{!accountRecord.BillingPostalCode}" styleClass="{!IF(accountRecord.BillingPostalCode== null,  'blankField', 'notEmpty')}"/>
+                  </apex:column>
+                  <apex:column headerValue="Billing Country">
+                          <apex:inputField label="{!accountRecord.BillingCountry}" value="{!accountRecord.BillingCountry}" styleClass="{!IF(accountRecord.BillingCountry== null,  'blankField', 'notEmpty')}"/>
+                  </apex:column>
+                  
+              </apex:pageblockTable>
+          </apex:pageblockSection>    
+          <apex:pageblockButtons >
+              <apex:commandButton action="{!save}" value="Save" onclick="return confirm('Are you sure you want to save?')"/>
+              <apex:commandButton action="{!Cancel}" value="Cancel"/>
+          </apex:pageblockButtons>
+      </apex:pageblock>
+  </apex:form>  
+</apex:page>

@@ -1,0 +1,30 @@
+<!--  Page -->        
+<apex:page controller="exampleController">
+    <apex:form >
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" />
+    
+        <apex:includescript value="{!URLFOR($Resource.ckEditor, 'ckeditor/ckeditor.js')}"/>
+        <apex:outputText value="Watch this counter: {!count}" id="counter">
+        Testing {!controllerGet}
+        </apex:outputText>
+        <apex:actionPoller action="{!incrementCounter}" reRender="counter" interval="5" oncomplete="testing"/>
+        <apex:inputtextarea value="{!inputText}" styleClass="ckeditor" id="textArea"/>
+        
+    </apex:form>
+    
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('iframe').attr('id', 'textArea');
+            $("#textArea").change(function(){
+                alert("The text has been changed.");
+            });
+        });
+    
+    </script>
+    
+    
+    
+    {!controllerGet}
+</apex:page>

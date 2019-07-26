@@ -1,0 +1,13 @@
+<apex:page standardController="Account" sidebar="False" extensions="myControllerExtension">
+     <p/>
+    <apex:form >
+        <apex:pageblock id="Account" >
+    
+        <apex:pageblockTable value="{!acct}" var="a">
+            <apex:column value="{!a.Name}"/>
+           
+        </apex:pageblockTable>
+
+    </apex:pageblock> 
+    </apex:form>
+</apex:page>

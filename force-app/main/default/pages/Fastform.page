@@ -1,0 +1,11 @@
+<apex:page showHeader="false" sidebar="false" >
+
+          <script type="text/javascript" id="jsFastForms">
+              window.onload = function assessment(){
+                 location.href = "https://dev1-nsw-gov.cs6.force.com/fastforms/apex/VisualAntidote__HostedFastForm?h=S7SZJ";
+              }
+          </script>
+         <!--
+          <iframe height="600px" width="1200px" src="https://dev1-nsw-gov.cs6.force.com/fastforms/apex/VisualAntidote__HostedFastForm?h=S7SZJ" scrolling="true"/>
+          -->
+</apex:page>

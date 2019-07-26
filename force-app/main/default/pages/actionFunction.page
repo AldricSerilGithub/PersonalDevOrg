@@ -1,0 +1,154 @@
+<apex:page showHeader="false" sidebar="false" controller="TestMapError">
+    <apex:includeScript value="/soap/ajax/18.0/connection.js" />
+    <apex:includeScript value="/soap/ajax/18.0/apex.js" />
+    <!--
+    <apex:includeScript value="{!URLFOR($Resource.jQuery)}"/>
+    -->
+
+     <apex:includeScript value="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" />
+
+<style type="text/css">
+        h2{
+            font-size: 31.5px;
+            line-height: 40px;
+            color: #747585;
+            margin-left: 20px;
+            
+        }
+        
+        #Content
+        {
+            position: relative;
+            width: 60%;
+            margin:0 auto;
+            border: 2px solid green;
+            
+        }
+
+        #divA
+        {
+            margin-top: 6%;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            position: absolute;
+            margin-right: 10px;
+            margin-left: 10px;
+            left: 5px;
+            top: 5px;
+            bottom: 5px;
+            right: 70%;
+            float: left;
+            width: 50%;
+        }
+
+        #divB
+        {
+            margin-top: 6%;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            left: 30%;
+            margin-left: 10px;
+            margin-right: 10px;
+            float: right;
+            width: 50%;
+        }
+    </style>
+  
+<div id="Content">    
+<h2>Browse By Workshop Type</h2>
+    
+  <apex:form >
+  
+    <apex:actionFunction name="toggleSelected"
+                         action="{!toggleSelect}"
+                         rerender="selectedList">
+      <apex:param name="pid" value="" />
+      <apex:param name="aldric" value="" />
+    </apex:actionFunction>
+   
+    <div id="divA">
+    <nav>
+    <apex:outputPanel id="theList">
+      <table>
+        <apex:repeat value="{!prodMap}" var="prodId">
+          <tr>
+              <td>
+                <output data-pid="{!prodId}" data-aldric="Testing" onClick="toggleCheck(this);">
+                   <a>{!prodMap[prodId].Name}</a>
+                </output>
+              </td>
+          </tr>
+        </apex:repeat>
+      </table>
+    </apex:outputPanel>
+    </nav>
+    </div>
+  </apex:form>
+  <br />
+<div id="divB">
+  
+  <article>
+  <apex:outputPanel id="selectedList">
+    <h3>Selected</h3>
+     <ul>
+      <apex:repeat value="{!selectedMap}" var="sId">
+        <li>{!selectedMap[sId].Name}</li>
+      </apex:repeat>
+    </ul>
+  </apex:outputPanel>
+  </article>
+  
+</div>
+  
+  </div>
+ 
+ 
+ 
+<!-- <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+
+<input class="datepicker" data-date-format="mm/dd/yyyy"/>
+-->
+  <script type="text/javascript">
+
+  var $j = jQuery.noConflict();
+
+
+    function toggleCheck(ele)
+    {
+      console.log( $j(ele).data('pid'));
+      console.log( $j(ele).data('aldric'));
+      toggleSelected( $j(ele).data('pid') ,$j(ele).data('aldric'));
+      
+    }
+
+   
+  </script>
+
+</apex:page>

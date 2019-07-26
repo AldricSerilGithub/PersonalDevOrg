@@ -1,0 +1,36 @@
+<apex:page sidebar="false"  standardController="Launch_360_View__c" extensions="Objectrecords" >
+    <apex:sectionheader subtitle="Custom Objects"/>
+
+<apex:form >
+<!--
+<apex:inputField value="{!Launch_360_View__c.Status__c}"/>
+-->
+<apex:pageblock title="Standard Object">
+    <apex:commandButton value="Show"  action="{!Stand}"/>
+</apex:pageblock>
+
+<apex:pageblock id="Login__c" title="Login" >
+<apex:outputpanel style="overflow:scroll;height:100px;" layout="block">            
+        <apex:pageblockTable value="{!Login}" var="a">
+            <apex:column style="width:150px" headerValue="Action">
+                <apex:commandLink action="{!Logins}" value="Open">
+                     <apex:param name="c" assignTo="{!LoginId}" value="{!a.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column style="width:150px" value="{!a.Timein__c}" />
+            <apex:column style="width:150px" value="{!a.Timeout__c}"/>
+            <apex:column style="width:150px" value="{!a.Total_Hours__c}"/>
+            <apex:column style="width:150px" value="{!a.Under_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Over_Time__c}"/>
+            <apex:column style="width:150px" value="{!a.Status__c}"/>
+        </apex:pageblockTable>
+</apex:outputpanel>
+    </apex:pageblock>
+
+
+
+</apex:form>
+
+
+</apex:page>

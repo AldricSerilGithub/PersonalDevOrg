@@ -1,0 +1,238 @@
+<apex:page id="SiteAuth" standardStylesheets="false" showHeader="false" title="Survey Tool - User Authentication" controller="ST_SiteAuthController" >
+ 
+ <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+ <style type="text/css">
+
+body{
+  background:#567;
+  font-family:'Open Sans',sans-serif;
+}
+
+.button{
+  width:100px;
+  background:#3399cc;
+  display:block;
+  margin:0 auto;
+  margin-top:1%;
+  padding:10px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+.button:hover{
+  background:#2288bb;
+}
+
+#login{
+  width:400px;
+  margin:0 auto;
+  margin-top:8px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+}
+
+#triangle{
+  width:0;
+  border-top:12x solid transparent;
+  border-right:12px solid transparent;
+  border-bottom:12px solid #3399cc;
+  border-left:12px solid transparent;
+  margin:0 auto;
+}
+
+#login h1{
+  background:#3399cc;
+  padding:20px 0;
+  font-size:140%;
+  font-weight:300;
+  text-align:center;
+  color:#fff;
+}
+
+form{
+  background:#f0f0f0;
+  padding:6% 4%;
+}
+
+input[type="text"],input[type="password"]{
+  width:92%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+
+input[type="submit"]{
+  width:100%;
+  background:#3399cc;
+  border:0;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+
+input[type="submit"]:hover{
+  background:#2288bb;
+}
+
+.hoverContainer{
+    color: #2d2d2d;
+    width: auto;
+    height: 28px;
+    position: absolute;
+    margin-top: 6px;
+    margin-left: 391px;
+    border: 1px solid skyblue;
+    padding: 5px;
+    font-size: 12px;
+    text-align: left;
+    background: skyblue;
+}
+
+.triangleLeft{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10.5px 21px 10.5px 0;
+    border-color: transparent skyblue transparent transparent;
+    margin-left: 370px;
+    margin-top: 15px;
+    position: absolute;
+
+}
+</style>
+
+<span href="#" class="button" id="toggle-login">Log in</span>
+
+<div id="login">
+  <div id="triangle"></div>
+  <h1>Survey Tool</h1>
+ 
+    <apex:form >
+         <apex:pageBlock > 
+                    <apex:inputText id="email"  value="{!email}" html-placeholder="Email" styleClass="hoverEnable emailInput"/>
+                    <apex:inputSecret id="tokenCode" value="{!tokenCode}" html-placeholder="Token Code"/>
+                    <apex:commandButton action="{!login}" value="Login" id="loginButton" />
+                    <apex:commandButton action="{!sendToken}" value="Send Token" />
+        </apex:pageBlock>
+    </apex:form>
+</div>
+
+<script>
+
+
+var overlayEmailMessage = "{!instruction}";
+var overlayTokenMessage = "THIS IS A MESSAGE 2";
+
+var isOverlay;
+
+$(document).ready(function(){
+
+    $('#toggle-login').click(function(){
+          $('#login').toggle();
+    });
+    
+    $('.hoverEnable').mouseover(function(){
+    
+        var overlayMessage = overlayTokenMessage ;
+       
+        
+        if($(this).hasClass('emailInput')){
+            overlayMessage = overlayEmailMessage;
+        }
+    
+        var overLayHtmlString = '<div class="triangleLeft"></div><div  class="hoverContainer">'+overlayMessage +'</div>';
+        
+        $(this).before(overLayHtmlString);
+    
+    }).mouseout(function(){
+       
+            $('.hoverContainer').remove();
+            $('.triangleLeft').remove();
+     
+        
+    });
+
+});
+
+</script>
+    
+    
+    
+    
+ 
+ 
+ <!--
+    <head>
+        <TITLE>Survey Tool - User Authentication</TITLE>
+    </head>
+   <apex:composition template="{!$Site.Template}">
+        <apex:define name="body">  
+            <apex:outputPanel id="pageMessages">
+                <apex:pageMessages />
+            </apex:outputPanel>
+            <center>
+                <apex:form id="siteAuth">
+                    <apex:panelGrid bgcolor="white" columns="1"> 
+                        <br/>
+                        <br/>
+                        <apex:panelGrid width="758" cellpadding="0" cellspacing="0" bgcolor="white" columns="1" styleClass="topPanelContainer"> 
+                            <br/>
+                            <apex:outputPanel layout="block" styleClass="topPanel">
+                                <apex:panelGrid width="758" cellpadding="0" cellspacing="0" bgcolor="white" columns="2"> 
+                                    <apex:image url="{!URLFOR($Resource.SiteSamples, 'img/clock.png')}"/>
+                                    <apex:panelGroup >
+                                        <br/>
+                                        <apex:outputText styleClass="title" value="{!$Label.site.login}"/>
+                                        <br/>
+                                        <apex:PageMessage summary="{!instruction}" title="Instruction:" severity="INFO" strength="1">
+                                        </apex:PageMessage>
+                                        <apex:outputPanel id="loginPanel">
+                                            <apex:panelGrid columns="2">
+                                                <apex:outputLabel value="Email: " for="email"/>
+                                                <apex:inputText id="email" value="{!email}"/>
+                                                <apex:outputLabel value="Token Code: " for="tokenCode"/>
+                                                <apex:inputSecret id="tokenCode" value="{!tokenCode}"/>
+                                                <apex:commandButton action="{!sendToken}" value="Send Token" reRender="loginPanel, pageMessages"/>
+                                                <apex:commandButton action="{!login}"     value="Login" id="loginButton"/>
+                                            </apex:panelGrid>
+                                        </apex:outputPanel>
+                                       <br/>
+                                   </apex:panelGroup>
+                              </apex:panelGrid> 
+                            </apex:outputPanel>
+                            <br/>
+                        </apex:panelGrid> 
+                    </apex:panelGrid>
+               </apex:form>
+            </center>  
+        </apex:define>      
+    </apex:composition>  
+
+    -->
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</apex:page>

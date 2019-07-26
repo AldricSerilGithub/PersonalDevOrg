@@ -1,0 +1,74 @@
+<aura:component >
+    <div class="demo-only" style="height: 640px;">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <lightning:icon iconName="utility:close"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    
+                </header>
+                        <fieldset class="slds-box slds-theme--default slds-container--large divFieldSet">
+            
+            
+            <legend  class="slds-text-heading--small 
+                            slds-p-vertical--small">
+                <h1>Contact Us<lightning:icon iconName="utility:case"/></h1>
+            </legend>
+            
+            <form  action="{!v.recordForm}" method="POST">
+                <!--
+            <form  action="https://woolworths  Accdev3.cs72.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
+   
+     <input type="hidden" name="orgid" value="00D5D000000CqDu"/>
+                <input type="hidden" name="retURL" value="https://accdev3-wowlink.cs72.force.com"/>
+                -->
+                <input type="hidden" name="orgid" value="{!v.organizationId}"/>
+                <input type="hidden" name="retURL" value="{!v.returnUrl}"/>
+                
+                <input type="hidden" name="type" value="General Enquiry"/>
+                
+                <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                <!--  these lines if you wish to test in debug mode.                          -->
+                <!--  <input type="hidden" name="debug" value=1>                              -->
+                <!--  <input type="hidden" name="debugEmail"                                  -->
+                <!--  value="jaldricseril@woolworths.com.au">                                 -->
+                
+                <label for="subject">Subject</label><input class="slds-input" id="subject" maxlength="80" name="subject" size="20" type="text" /><br/>
+                
+                <label for="description">Description</label><textarea class="slds-input" name="description"></textarea><br/>
+                
+                <label for="company">Company</label><input class="slds-input" id="company" maxlength="80" name="company" size="20" type="text" /><br/>
+                <!--
+                First Name:<input class="slds-input" id="00N5D000000wanZ" maxlength="50" name="00N5D000000wanZ" size="20" type="text" /><br/>
+                
+                Last Name:<input class="slds-input" id="00N5D000000wane" maxlength="50" name="00N5D000000wane" size="20" type="text" /><br/>
+                -->
+                First Name:<input class="slds-input" id="{!v.firstName}" maxlength="50" name="{!v.firstName}" size="20" type="text" /><br/>
+                
+                Last Name:<input class="slds-input" id="{!v.lastName}" maxlength="50" name="{!v.lastName}" size="20" type="text" /><br/>
+                
+                
+                
+                <label for="phone">Phone</label><input class="slds-input" id="phone" maxlength="40" name="phone" size="20" type="text" /><br/>
+                
+                <label for="email">Email</label><input class="slds-input" id="email" maxlength="80" name="email" size="20" type="text" /><br/>
+                <!--
+                <input type="hidden" id="recordType" name="recordType" value="0125D0000000Nqh"/>
+                -->
+                
+                <input type="hidden" id="recordType" name="recordType" value="{!v.recordType}"/>
+                
+                <input type="hidden"  id="external" name="external" value="1" /><br/>
+                
+                <button type="submit" name="submit" class="slds-button slds-button_neutral" onclick="{!c.showToast}">Submit</button>
+                
+            </form>
+        </fieldset>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</aura:component>

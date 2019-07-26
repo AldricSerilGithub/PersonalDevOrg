@@ -1,0 +1,115 @@
+<apex:page sidebar="false" showHeader="false" >
+<html >
+<head>
+  
+  <title>Create a New Pen</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(http://fonts.googleapis.com/css?family=Fredericka+the+Great|Frijole);
+body {
+  background: #111113;
+}
+
+h1 {
+  color: #bfffc9;
+  text-align: center;
+  margin: 1em;
+  padding: 0;
+  font-size: 47px;
+  text-transform: uppercase;
+  font-family: 'Fredericka the Great', 'Frijole';
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1em;
+}
+
+.lights-1 {
+  animation: twinkle 1s infinite;
+}
+
+.lights-2 {
+  animation: twinkle 2s infinite;
+}
+
+.lights-3 {
+  animation: twinkle 3s infinite;
+}
+
+.lights-4 {
+  animation: twinkle 4s infinite;
+}
+
+.lights-5 {
+  animation: twinkle 5s infinite;
+}
+
+.lights-6 {
+  animation: twinkle 6s infinite;
+}
+
+.lights-7 {
+  animation: twinkle 7s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    color: #ffbfcf;
+    text-shadow: 0 0 15px #ff0040, 0 0 25px #ff0040;
+  }
+  20% {
+    color: #e2bfff;
+    text-shadow: 0 0 15px #8c00ff, 0 0 25px #8c00ff;
+  }
+  40% {
+    color: #bfe9ff;
+    text-shadow: 0 0 15px #00a6ff, 0 0 25px #00a6ff;
+  }
+  60% {
+    color: #bfffc9;
+    text-shadow: 0 0 15px #00ff26, 0 0 25px #00ff26;
+  }
+  80% {
+    color: #fffbbf;
+    text-shadow: 0 0 15px #ffee00, 0 0 25px #ffee00;
+  }
+}
+
+    </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</link>
+
+</head>
+
+<body>
+  <h1>Christmas Lights!</h1>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+   <script >
+     $(document).ready(function() {
+  var html = $('h1').html();
+  var ret = "";
+  var rando = 0;
+
+  $.each(html.split(''), function(k, v) {
+    rando = Math.floor(Math.random() * 7) + 1
+    ret += '<span class="lights-' + rando + '">' + v + '</span>';
+  });
+
+  $('h1').html(ret);
+});
+    
+    </script>
+
+
+</body>
+</html>
+
+
+
+
+</apex:page>

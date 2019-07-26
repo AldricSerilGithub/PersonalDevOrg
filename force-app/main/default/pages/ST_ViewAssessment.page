@@ -1,0 +1,90 @@
+<apex:page standardController="Assessment__c" extensions="ST_ViewAssessmentController" showHeader="false" renderAs="PDF"  action="{!checkTokenCode}">
+    <apex:stylesheet value="{!URLFOR($Resource.PDF360View, 'exportPDF.css')}"/>        
+    <head>
+        <TITLE>ST Assessment - View Assessment</TITLE>
+        <style type="text/css">
+            x1 {
+                font-family:Chalkboard, 'Comic Sans', sans-serif;
+                font-size: 85%;
+            }
+            table{
+                border: 1px solid black;
+                padding:10px;
+            }
+        </style>
+    </head>
+    
+        
+    <apex:define name="body">
+    <apex:form id="frm">
+                    <span style="margin:25px">
+                </span>
+<x1>
+<div>
+    <br />
+    <b>Assessment Number:</b> &nbsp; <apex:outputText ><b>{!Assessment__c.Name}</b></apex:outputText><br /><br />
+    <b>Email:</b> &nbsp; <apex:outputText >{!Assessment__c.Transcript__r.Email__c} </apex:outputText><br />
+    <b>Survey Type:</b> &nbsp; <apex:outputText value="{!Assessment__c.Exam_Set__r.Name}"/>    
+    <br /><br />
+    
+
+    <br/>
+    
+     
+</div>
+</x1>    
+    <apex:outputPanel id="Container">
+        <apex:pageBlock >
+        <apex:pageblockSection title="Survey">
+        <apex:PageBlockTable value="{!CapabSFDC}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Question" value="{!a.Question__r.Question__c}" width="450"/>
+                <apex:column headerValue="Answer" >
+                    <apex:outputText value="{!a.ST_Answer__c}" rendered="{!NOT(a.Question__r.IsMultiple__c)}"/>
+                    <apex:outputText value="A" rendered="{!a.AssertA__c}"/>
+                    <apex:outputText value="B" rendered="{!a.AssertB__c}"/>
+                    <apex:outputText value="C" rendered="{!a.AssertC__c}"/>
+                    <apex:outputText value="D" rendered="{!a.AssertD__c}"/>
+                    <apex:outputText value="E" rendered="{!a.AssertE__c}"/>
+                </apex:column>
+        </apex:PageBlockTable>   
+        </apex:pageblockSection>
+        
+        <!--
+        <apex:pageblockSection title="JAVA">
+        <apex:PageBlockTable value="{!CapabJAVA}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Skill" value="{!a.Question__r.Question__c}" width="450"/>
+            <apex:column headerValue="Proficiency" value="{!a.CAMS_Answer__c}"/>
+        </apex:PageBlockTable>  
+        </apex:pageblockSection> 
+        <apex:pageblockSection title="TESTING">
+        <apex:PageBlockTable value="{!CapabTESTING}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Skill" value="{!a.Question__r.Question__c}" width="450"/>
+            <apex:column headerValue="Proficiency" value="{!a.CAMS_Answer__c}"/>
+        </apex:PageBlockTable>  
+        </apex:pageblockSection> 
+        <apex:pageblockSection title="TOOLS">
+        <apex:PageBlockTable value="{!CapabTOOLS}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Skill" value="{!a.Question__r.Question__c}" width="450"/>
+            <apex:column headerValue="Proficiency" value="{!a.CAMS_Answer__c}"/>
+        </apex:PageBlockTable>  
+        </apex:pageblockSection> 
+        <apex:pageblockSection title="OTHER LANGUAGES">
+        <apex:PageBlockTable value="{!CapabLANG}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Skill" value="{!a.Question__r.Question__c}" width="450"/>
+            <apex:column headerValue="Proficiency" value="{!a.CAMS_Answer__c}"/>
+        </apex:PageBlockTable>  
+        </apex:pageblockSection> 
+        <apex:pageblockSection title="OTHERS">
+        <apex:PageBlockTable value="{!CapabOTHERS}" var="a" cellspacing="1" cellpadding="2" border="1" style="font-style:berlin-sans-fb;font-size:12pt">
+            <apex:column headerValue="Skill" value="{!a.Question__r.Question__c}" width="450"/>
+            <apex:column headerValue="Proficiency" value="{!a.CAMS_Answer__c}"/>
+        </apex:PageBlockTable>  
+        </apex:pageblockSection> 
+        -->
+    </apex:pageBlock>
+    </apex:outputPanel>
+    </apex:form>
+    </apex:define>
+
+
+</apex:page>

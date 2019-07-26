@@ -1,0 +1,94 @@
+<apex:page controller="ImportDataFromCSVController" showHeader="False">
+   
+  <style type="text/css">
+  
+  
+   body{
+        background:darkgray;
+        font-family:'Open Sans',sans-serif;
+    }
+    
+    form{
+        background:#f0f0f0;
+        padding:2% 3%;
+    }
+    
+    body .bPageTitle .ptBody {
+        background-color: lavender;
+        color: black;
+        padding: 0;
+    }
+    
+    div.questionBox {
+        width:500px;
+        border:5px;
+        margin-left:100px;
+        margin-top:20px
+    }
+    div.footer {
+        width:500px;
+        border:5px;
+        margin-left:200px;
+        margin-top:20px        
+    }
+</style>
+  <apex:sectionHeader title="Import/Upsert/Delete Questionnaire"/>
+    <apex:form >
+        <apex:pagemessages />
+        
+     <apex:pageBlock >
+         <apex:pageBlockSection columns="6">
+               <apex:inputFile value="{!csvFileBody}"  filename="{!csvAsString}"/>
+               <apex:commandButton value="Import Questionnaire" action="{!ImportCSVFile}"/>
+               <apex:commandButton value="Upsert Questionnaire" action="{!upsertCSVFile}"/>
+               <apex:commandButton value="Delete Questionnaire" action="{!DeleteCSVFile}"/>
+         </apex:pageBlockSection>
+     </apex:pageBlock>
+        
+     <apex:pageBlock title="Successfully Imported Records" rendered="{!NOT(questionList.size==0)}">
+         <apex:outputPanel layout="block" style="overflow: auto; height: 500px;">
+               <apex:pageblocktable value="{!questionList}" var="rec">
+                      <apex:column value="{!rec.Question__c}" />
+                      <apex:column value="{!rec.Choice_A__c}" />
+                      <apex:column value="{!rec.Choice_B__c}" />
+                      <apex:column value="{!rec.Choice_C__c}" />
+                      <apex:column value="{!rec.Choice_D__c}" />
+                      <apex:column value="{!rec.Choice_E__c}" />
+                      <apex:column value="{!rec.ExamSet__c}" />
+                      <apex:column value="{!rec.IsMultiple__c}" />
+               </apex:pageblocktable>
+         </apex:outputpanel>
+     </apex:pageBlock>
+
+     <apex:pageBlock title="Successfully Deleted Records" rendered="{!NOT(delQuestionList.size==0)}">
+         <apex:outputPanel layout="block" style="overflow: auto; height: 500px;">
+               <apex:pageblocktable value="{!delQuestionList}" var="rec">
+                      <apex:column value="{!rec.Question__c}" />
+                      <apex:column value="{!rec.Choice_A__c}" />
+                      <apex:column value="{!rec.Choice_B__c}" />
+                      <apex:column value="{!rec.Choice_C__c}" />
+                      <apex:column value="{!rec.Choice_D__c}" />
+                      <apex:column value="{!rec.Choice_E__c}" />
+                      <apex:column value="{!rec.ExamSet__c}" />
+                      <apex:column value="{!rec.IsMultiple__c}" />
+               </apex:pageblocktable>
+        </apex:outputpanel>
+     </apex:pageBlock>
+
+     <apex:pageBlock title="Successfully Upserted Records" rendered="{!NOT(updQuestionList.size==0)}">
+         <apex:outputPanel layout="block" style="overflow: auto; height: 500px;">
+               <apex:pageblocktable value="{!updQuestionList}" var="rec">
+                      <apex:column value="{!rec.Question__c}" />
+                      <apex:column value="{!rec.Choice_A__c}" />
+                      <apex:column value="{!rec.Choice_B__c}" />
+                      <apex:column value="{!rec.Choice_C__c}" />
+                      <apex:column value="{!rec.Choice_D__c}" />
+                      <apex:column value="{!rec.Choice_E__c}" />
+                      <apex:column value="{!rec.ExamSet__c}" />
+                      <apex:column value="{!rec.IsMultiple__c}" />
+               </apex:pageblocktable>
+         </apex:outputpanel>
+     </apex:pageBlock>
+
+   </apex:form>
+</apex:page>

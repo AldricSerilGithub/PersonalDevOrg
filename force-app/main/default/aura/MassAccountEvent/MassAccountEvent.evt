@@ -1,0 +1,5 @@
+<aura:event type="Component" description="Event template">
+	<aura:attribute name="UpdatedAccountList" type="Object"/>
+    <aura:attribute name="index" type="Integer"/>
+    <aura:attribute name="accountToDelete" type="Account"/>
+</aura:event>

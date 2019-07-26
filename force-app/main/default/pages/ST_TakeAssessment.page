@@ -1,0 +1,113 @@
+<apex:page standardController="Assessment__c" showHeader="false" title="ST Assessment - Take Assessment" extensions="ST_TakeAssessmentController">
+    <head>
+        <TITLE>ST Assessment - Take Assessment</TITLE>
+    </head>
+    
+   
+   <apex:pageMessages />
+   <apex:sectionHeader title="Survey Tool"/>
+
+        <apex:form id="frm" rendered="{!IsValidAssessment}">        
+
+        <apex:pageBlock id="takeexam" rendered="{!takingexam}" title="{!Assessment__c.Exam_Set__r.Name}">
+        <br/> 
+        <h1>
+        Respondent Name: <i> <u> {!Assessment__c.Resource__c} </u> </i>
+        </h1>
+         <br/>
+         <br/>
+           As part ongoing commitment by SFDC to understand customer needs and improve its performance, we wish to hear your views.  You are encouraged to provide any feedback on your experiences working with us.
+           <br />
+           <br />
+            The survey should take only around 5-10 minutes to complete.
+             <br />
+             <br/>
+            
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Launch Survey" action="{!showPopup}" rerender="popup"/>
+        </apex:pageBlockButtons>
+        
+        <apex:outputPanel id="popup">
+            <center>
+                <apex:outputPanel id="questionId" styleClass="customPopup" layout="block" rendered="{!displayPopUp}">
+                    <apex:pageblockSection title="{!Assessment__c.Exam_Set__r.Name}" collapsible="false" columns="1" id="section1">
+                        <apex:repeat value="{!CapabSFDC}" var="a" first="{!currentIndex}" rows="{!pagesize}">       
+                            <apex:outputText label="" value="{!a.Question__r.Question__c}"/>
+                            <apex:selectRadio value="{!a.ST_Answer__c}" label="" layout="pageDirection" rendered="{!NOT(a.Question__r.IsMultiple__c) && NOT(a.Question__r.IsTrueOrFalse__c)}">
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_A__c}" itemLabel="{!a.Question__r.Choice_A__c}"/>
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_B__c}" itemLabel="{!a.Question__r.Choice_B__c}"/>
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_C__c}" itemLabel="{!a.Question__r.Choice_C__c}" />
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_D__c}" itemLabel="{!a.Question__r.Choice_D__c}" rendered="{!a.Question__r.Choice_D__c != Null}" />
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_E__c}" itemLabel="{!a.Question__r.Choice_E__c}" rendered="{!a.Question__r.Choice_E__c != Null}"/>
+                            </apex:selectRadio>
+                        
+                            <apex:selectRadio value="{!a.ST_Answer__c}" label="" rendered="{!a.Question__r.IsTrueOrFalse__c && NOT(a.Question__r.IsMultiple__c) }">
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_A__c}" itemLabel="{!a.Question__r.Choice_A__c}"/>
+                                <apex:selectOption itemValue="{!a.Question__r.Choice_B__c}" itemLabel="{!a.Question__r.Choice_B__c}"/>
+                            </apex:selectRadio>
+                   
+                            <apex:outputPanel rendered="{!a.Question__r.IsMultiple__c}">
+                                <apex:inputField value="{!a.AssertA__c}"/>
+                                <apex:outputText value="{!a.Question__r.Choice_A__c}"/><br />
+                                <apex:inputField value="{!a.AssertB__c}"/>
+                                <apex:outputText value="{!a.Question__r.Choice_B__c}"/><br />
+                                <apex:inputField value="{!a.AssertC__c}" />
+                                <apex:outputText value="{!a.Question__r.Choice_C__c}" /><br />
+                                <apex:inputField value="{!a.AssertD__c}" rendered="{!a.Question__r.Choice_D__c != Null}"/>
+                                <apex:outputText value="{!a.Question__r.Choice_D__c}" rendered="{!a.Question__r.Choice_D__c != Null}"/><br />
+                                <apex:inputField value="{!a.AssertE__c}" rendered="{!a.Question__r.Choice_E__c != Null}"/>
+                                <apex:outputText value="{!a.Question__r.Choice_E__c}" rendered="{!a.Question__r.Choice_E__c != Null}"/><br /><br /><br />
+                            </apex:outputPanel>                
+                        </apex:repeat>
+                    </apex:pageblockSection> 
+                    <br/><br/>
+                    <apex:commandButton value="Close" action="{!closePopup}" rerender="popup"/>
+                    <apex:commandButton id="submit"  action="{!submitAssessment}" value="Submit" rendered="{!NOT(isNotLastPage)}" />  
+                
+                <apex:outputPanel id="paginationLinks" rendered="{!showPagination}">                    
+                    <table >
+                        <tr>
+                            <td width="20%"><apex:commandLink id="first" action="{!first}" rendered="{!isNotFirstPage}" value="◄◄ First Page" reRender="questionId, theList,paginationLinks,first,previous,next,last"/></td>
+                            <td width="20%"><apex:commandLink id="previous" action="{!previous}" rendered="{!hasPrevious}" value="◄ Previous Page" reRender="questionId, theList,paginationLinks,first,previous,next,last"/></td>
+                            <td width="20%"><apex:outputText value="Page {!currentPage} of {!lastPage}" /></td>
+                            <td width="20%"><apex:commandLink id="next" action="{!next}" rendered="{!hasNext}" value="Next Page ►" reRender="questionId, theList,paginationLinks,first,previous,next,last"/></td>
+                            <td width="20%"><apex:commandLink id="last" action="{!last}" rendered="{!isNotLastPage}" value="Last Page ►►" reRender="questionId, theList,paginationLinks,first,previous,next,last"/></td>
+                        </tr>
+                    </table>
+                </apex:outputPanel>                
+                </apex:outputPanel>
+            </center>                       
+        </apex:outputPanel>  
+      
+               
+        </apex:pageBlock>
+        </apex:form>
+ 
+<style type="text/css">
+ 
+body{
+    background:#567;
+    font-family:'Open Sans',sans-serif;
+}
+
+form{
+    background:#f0f0f0;
+    padding:2% 3%;
+}
+
+ 
+.customPopup {
+    overflow-y: scroll;
+    width: 62%;
+    height: 75%;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    position: absolute;
+    z-index: 9999;
+    top: 100px;
+    margin-left: 160px;  
+}
+</style>
+</apex:page>

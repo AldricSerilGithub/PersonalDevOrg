@@ -1,0 +1,96 @@
+<apex:page standardController="Transcript__c" cache="false" extensions="ST_ViewTranscriptController" showHeader="false" action="{!checkTokenCode}">
+    <head>
+        <TITLE>ST Assessment - View Transcript</TITLE>
+    </head>
+    <apex:sectionHeader title="{!Transcript__c.User_Type__c} Details" />
+
+<style type="text/css">
+
+    body{
+        background:darkgray;
+        font-family:'Open Sans',sans-serif;
+    }
+    
+    form{
+        background:#f0f0f0;
+        padding:2% 3%;
+    }
+    
+    body .bPageTitle .ptBody {
+        background-color: lavender;
+        color: black;
+        padding: 0;
+    }
+
+    div.questionBox {
+        width:500px;
+        border:5px;
+        margin-left:100px;
+        margin-top:20px
+    }
+    div.footer {
+        width:500px;
+        border:5px;
+        margin-left:200px;
+        margin-top:20px        
+    }
+</style>
+    <apex:pageMessages />
+
+    
+    <apex:form >    
+        <apex:pageblock title="Resource Detail" rendered="{!IsValidTranscript}">
+            <apex:pageBlockSection collapsible="false" columns="1">
+                <apex:outputField value="{!Transcript__c.Name}"/>
+               <apex:outputField value="{!Transcript__c.Email__c}"/>
+          </apex:pageBlockSection>
+        </apex:pageblock>
+      
+        <apex:pageblock title="Survey Type" id="Assessment_Type" mode="detail" rendered="{!IsValidTranscript}">        
+            <apex:pageBlockSection collapsible="false" columns="1">
+                <apex:outputText style="font-weight:700;" value="Please Select Survey and Click Take Survey button to start."/>
+                <apex:outputText label="Survey">                     
+                    <apex:selectList value="{!selectedSurvey}" multiselect="false" size="1" >
+                        <apex:selectOptions value="{!SurveyOptions}"/>
+                    </apex:selectList>
+                </apex:outputText>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Take Survey" action="{!launchExam}" disabled="{!NOT(takeSurvey)}"/>
+            </apex:pageBlockButtons>
+        </apex:pageblock>
+        
+        <apex:pageBlock title="My Assessments" rendered="{!IsValidTranscript}">
+            <apex:pageBlockTable var="assess" value="{!Transcript__c.Assessments__r}">
+                <apex:column value="{!assess.Name}"/>
+                <apex:column value="{!assess.CreatedDate}"/>
+                <apex:column >
+                    <apex:outputLink value="/apex/ST_ViewAssessment?id={!assess.id}&eid={!eid}&tc={!tokenCode}" target="_blank">View Result</apex:outputLink>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:pageblock title="Import/Upsert/Delete Questionnaire" rendered="{!Transcript__c.User_Type__c=='Admin'}">
+            <apex:pageBlockSection collapsible="false" columns="1">
+                 <apex:commandbutton value="Import/Delete" onClick="window.open('{!ImportLink}','Import/Delete Window','top=100, left=100,height=800,width=1000')"/>
+                    <apex:outputLink value="{!URLFOR($Resource.Questionnaire)}" type="application/csv" >
+                        Download Template
+                    </apex:outputLink>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+        
+        <apex:pageblock title="Manage Questions" rendered="{!Transcript__c.User_Type__c=='Admin'}">
+            <apex:pageBlockSection collapsible="false" columns="1">
+                 <apex:commandbutton value="Manage" onClick="window.open('{!UpdateLink}','Update Window','top=100, left=100,height=800,width=1000')"/>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+        
+        <apex:pageblock title="Manage Survey Taker" rendered="{!Transcript__c.User_Type__c=='Admin'}">
+            <apex:pageBlockSection collapsible="false" columns="1">
+                 <apex:commandbutton value="Manage" onClick="window.open('{!SurveyTakerLink}','Update Window','top=100, left=100,height=800,width=1000')"/>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+                      
+    </apex:form>    
+</apex:page>

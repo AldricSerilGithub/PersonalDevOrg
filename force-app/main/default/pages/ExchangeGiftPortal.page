@@ -1,0 +1,168 @@
+<apex:page StandardController="ExchangeGift__c" extensions="exchangeGiftController" showHeader="false" sidebar="false">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system.css')}" />
+   
+   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Righteous" />
+    <style type="text/css">
+        html { 
+            background: url("http://www.indianlink.com.au/wp-content/uploads/2010/12/christmas-gifts-013.jpg") no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        h3 {
+    font-family: Righteous;
+    font-size: 40px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: 400;
+    line-height: 44px;
+}
+        
+        h1 {
+  color: #bfffc9;
+  text-align: center;
+  margin: 1em;
+  padding: 0;
+  font-size: 80px;
+  text-transform: uppercase;
+  font-family: 'Fredericka the Great', 'Frijole';
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1em;
+}
+
+.lights-1 {
+  animation: twinkle 1s infinite;
+}
+
+.lights-2 {
+  animation: twinkle 2s infinite;
+}
+
+.lights-3 {
+  animation: twinkle 3s infinite;
+}
+
+.lights-4 {
+  animation: twinkle 4s infinite;
+}
+
+.lights-5 {
+  animation: twinkle 5s infinite;
+}
+
+.lights-6 {
+  animation: twinkle 6s infinite;
+}
+
+.lights-7 {
+  animation: twinkle 7s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    color: #ffbfcf;
+    text-shadow: 0 0 15px #ff0040, 0 0 25px #ff0040;
+  }
+  20% {
+    color: #e2bfff;
+    text-shadow: 0 0 15px #8c00ff, 0 0 25px #8c00ff;
+  }
+  40% {
+    color: #bfe9ff;
+    text-shadow: 0 0 15px #00a6ff, 0 0 25px #00a6ff;
+  }
+  60% {
+    color: #bfffc9;
+    text-shadow: 0 0 15px #00ff26, 0 0 25px #00ff26;
+  }
+  80% {
+    color: #fffbbf;
+    text-shadow: 0 0 15px #ffee00, 0 0 25px #ffee00;
+  }
+}
+
+        
+          
+    </style>
+        
+            
+
+    
+    <div class="slds" >  
+        <div style="max-height: 100%">  
+            <div align="Center" style="padding-top: 5%;"> 
+                <h1>QWERTY's Exchange Gift</h1> 
+                 
+            </div>
+                <div  style="padding-top: 5%; padding-left: 50%; min-width: 100px; padding-right: 20%; max-width: 100%" >
+                <apex:pageMessages ></apex:pageMessages>
+
+                    <div class="modal-dialog slds" style="margin-bottom:0">
+                        <div class="modal-content">
+                            <div class="slds-form-element">
+                                <apex:form styleclass="slds-form--stacked" >
+                                    <form role="form">
+                                        <div class="slds-form-element__control" style="padding-bottom: 1%">
+                                               <h3>{!Exchan.Full_Name__c}</h3> 
+                                        </div>
+                                
+                                        <div class="slds-form-element__control" style="padding-bottom: 1%">
+                                            <apex:inputField styleClass="slds-input" value="{!Exchan.Email__c}" html-placeholder="Email Address" required="true" />
+                                        </div>
+                                
+                                        <div class="slds-form-element__control" style="padding-bottom: 1%">
+                                            <apex:inputTextarea rows="5" styleClass="slds-textarea" value="{!Exchan.Request_Gift__c}" html-placeholder="Wishlist" required="true"/>
+                                        </div>
+                                        
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+                                        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                                        <script>
+                                            function Confirmation() {
+                                               var con =  confirm('Are you sure you want to submit your entry?');
+                                               if(con==true){
+                                                   return true;    
+                                               }
+                                               else{
+                                                   return false;
+                                               }
+                                            }
+                                            
+                                            function SuccessSave(){
+                                                alert("You have successfully Submitted your Entry");
+                                                window.close();
+                                            }
+                                            
+                                            $(document).ready(function() {
+  var html = $('h1').html();
+  var ret = "";
+  var rando = 0;
+
+  $.each(html.split(''), function(k, v) {
+    rando = Math.floor(Math.random() * 7) + 1
+    ret += '<span class="lights-' + rando + '">' + v + '</span>';
+  });
+
+  $('h1').html(ret);
+});
+                                            
+                                            
+                                        </script>
+                                        <div class="slds-command-button">
+                                            <apex:commandButton styleClass="slds-button slds-button_brand" style="border-radius: 10px;" value="Submit" action="{!saveRecord}" onclick=" return Confirmation()" />
+                                            <apex:commandButton styleClass="slds-button" style="border-radius: 10px;" value="Your Lucky Pick" action="{!namePick}" disabled="false"/>
+                                        </div>
+                                    </form>
+                              </apex:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
+    
+</apex:page>
